@@ -1,0 +1,144 @@
+.Part3FivetSection{
+  /* background-color: black; */
+  /* margin-top: 5rem; */
+  /* font-family: 'Rampart One', sans-serif; */
+  /* font-family: 'Tilt Prism', sans-serif; */
+  /* font-family: 'Young Serif', serif; */
+}
+
+.text1{
+/* font-size: 130px;
+color: white;
+font-weight: 700;
+margin-left: 3rem ; */
+
+}
+
+.icon{
+  font-size: 130px;
+  margin-left: 3rem ;
+  color: white;
+  
+}
+
+.text2{
+  /* font-family: 'Londrina Shadow', sans-serif;
+  color: white;
+  font-size: 130px;
+  margin-left: 3rem ; */
+
+}
+
+.Part3FivetSection {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.top-circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  z-index: 2;
+}
+
+.bottom-circles {
+  position: absolute;
+  bottom: 0; 
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  z-index: 2;
+}
+
+.circle {
+  width: 8rem;
+  height: 8rem;
+
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  
+}
+.circle img{
+   
+  object-position: center center;
+  object-fit: cover;
+  
+}
+
+
+
+
+.circle2 img {
+  /* clip-path: circle(50% at 50% 50%);  */
+  transform: rotate(20deg);
+  
+  object-position: center center;
+  width: 100%;
+  object-fit: cover;
+  height: 90%; 
+}
+
+
+.circle4 img {
+  /* clip-path: circle(50% at 50% 50%);  */
+  /* transform: skew(-30deg); */
+  transform: rotate(-20deg);
+  object-position: center center;
+  object-fit: cover;
+  width: 100%;
+  height: 90%; 
+}
+
+.circle:hover {
+  transform: scale(1.1);
+}
+
+.circle2 {
+  top: -10rem;
+}
+
+.circle3 {
+  top: -20rem; 
+}
+
+
+
+
+
+.MarqueeLast{
+z-index: 0;  
+  
+  height: 300px;
+}
+
+.textMarqueeLast{
+font-size: 100px;
+color: white;
+font-weight: 700;
+margin-left: 3rem ;
+
+}
+
+
+
+.text2MarqueeLast{
+  font-family: 'Londrina Shadow', sans-serif;
+  color: white;
+  font-size: 100px;
+  
+}
+
+img{
+  margin-left: 8px;
+  margin-bottom: 18px;
+}
+

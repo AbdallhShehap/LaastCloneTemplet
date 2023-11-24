@@ -1,0 +1,163 @@
+
+.FiveSection{
+    width: 100%;
+    
+    
+  }
+  
+  .FiveSection-cont{
+    width: 100%;
+    height: auto;
+  
+}
+
+.FiveSection-cont{
+    width: 100%;
+ 
+  
+}
+
+
+
+
+  .image-text{
+    max-width: 350px;
+  }
+
+  .product-slider {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    justify-content: space-between;
+    /* padding: 10px; */
+    width: 100%;
+    
+  }
+
+
+  
+@media (min-width: 1600px) {
+  .product-slider{
+    width: 90%;
+  }
+ 
+}
+  
+@media (min-width: 2000px) {
+  .product-slider{
+    width: 90%;
+  }
+ 
+}
+  
+@media (min-width: 2100px) {
+  .product-slider{
+    width: 85%;
+  }
+ 
+}
+@media (min-width: 2350px) {
+  .product-slider{
+    width: 90%;
+  }
+ 
+}
+  
+  .product-card {
+    /* width: calc(33.33% - 20px); Three products per slide with spacing */
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .product-card img {
+   width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Style your product cards as needed */
+  .product-card h3 {
+    font-size: 18px;
+  }
+  
+  .product-card p {
+    font-size: 14px;
+  }
+  
+
+  .subtitle {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  
+  .subtitle:hover::after {
+    content: "+";
+    position: absolute;
+    top: 0;
+    right: 100%;
+    transform: translateX(5px);
+    
+  }
+
+  .subtitle:hover {
+    transform: translateX(2rem); 
+  }
+  
+  .subtitle:hover::after {
+    transform: translateX(0rem); /* Adjust the value as needed */
+    opacity: 1;
+  }
+
+
+
+  
+.fivecircle-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #56595b;
+  color: white;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  cursor: pointer;
+
+  /* bottom: -10px;
+  left: 80px; */
+
+}
+
+.fivecircle-btn:hover {
+  width: 175px;
+  height: 60px;
+  border-radius: 35%;
+  transition: 0.4s;
+}
+
+
+
+.fivecircle-btnspan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+bottom: 2px;
+left: 20px;
+  color: white;
+  transition: all 0.4 ease;
+  cursor: pointer;
+
+}
+
+.fivecircle-container:hover .fivecircle-btn {
+  width: 130px;
+  height: 60px;
+  border-radius: 35px;
+  /* transition: 0.4s; */
+}

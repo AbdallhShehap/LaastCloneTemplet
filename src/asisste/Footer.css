@@ -1,0 +1,40 @@
+.custom-link {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.4s ease;
+  color: white;
+}
+
+.custom-link:hover::before {
+  content: "+";
+  position: absolute;
+  top: 0;
+  right: 100%;
+  transform: translateX(5px);
+  color: orange !important; /* Add !important */
+}
+
+.custom-link:hover {
+  transform: translateX(2rem);
+  color: orange !important; /* Add !important */
+}
+
+.custom-link:hover::before {
+  transform: translateX(0rem); /* Adjust the value as needed */
+  opacity: 1;
+}
+
+
+
+@media (min-width: 1600px) {
+  .text-center{
+    margin-left: 5%;
+  }
+ 
+}
+
+
+.social-icon:hover {
+    color: orange !important;
+  }
+  

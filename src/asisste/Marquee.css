@@ -1,0 +1,28 @@
+.MarqueeFirst{
+    
+  
+    height: 300px;
+}
+
+.textMarqueeFirst{
+font-size: 100px;
+color: white;
+font-weight: 700;
+margin-left: 3rem ;
+
+}
+
+
+
+.text2MarqueeFirst{
+    font-family: 'Londrina Shadow', sans-serif;
+    color: white;
+    font-size: 100px;
+    
+}
+
+img{
+    margin-left: 8px;
+    margin-bottom: 18px;
+}
+

@@ -1,0 +1,216 @@
+/* src/components/Navbar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    transition: background-color 0.3s, transform 0.3s;
+    padding: 0.5rem 1rem;
+
+  }
+
+  .navbar-alternate {
+    
+    position: fixed;
+    top: 0;
+    
+    width: 100%;
+    background-color: black;
+    z-index: 10; /* Ensure it's above other elements */
+    transition: transform 0.9s ease-in-out; /* Smooth transition for showing/hiding */
+    transform: translateY(-100%); /* Initially hidden */
+    
+  }
+  
+  .navbar-alternate.show {
+    /* margin: 0; */
+    padding-left: 0;
+    transform: translateY(0); /* Show the menu */
+  }
+
+  
+
+  
+  .nav-brand img {
+    height: 53px;
+    width: 53px;
+    margin-left: 10px;
+    cursor: pointer;
+
+  }
+  
+  .nav-items a {
+    color: white;
+    text-decoration: none;
+    margin-left: 4rem;
+    font-weight: 600;
+    cursor: pointer;
+
+  }
+  
+  .nav-items a:hover {
+    color: #FF7425; /* This will change the text color on hover */
+    transition: 0.3s;
+  }
+  
+  .nav-cart button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-left: 1rem;
+
+  }
+  
+  .imageunderSideMenu{
+    width: 100%;
+    max-width: 420px;
+    height: 110px;
+    max-height: auto;
+    margin: 0;
+    margin-right: 0;
+    padding: 0;
+    cursor: pointer;
+
+  }
+  
+  
+  .side-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 420px;
+    max-width: 420px;
+    height: 720px;
+    max-height: 720px;
+    background: #181818;
+    padding: 10px;
+    box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    opacity: 0; /* Start from fully transparent */
+    visibility: hidden; /* Hide the menu to prevent accidental clicks */
+    transition: transform 2s ease-in-out; /* Opening transition duration */
+  }
+  
+  .side-menu.show {
+    transform: translateX(0);
+    opacity: 1; /* Fade to fully visible */
+    visibility: visible; /* Make it visible */
+  }
+  
+  .side-menu.closing {
+    transition: transform 4s ease-in-out; /* Closing transition duration (slower) */
+  }
+
+
+  .side-menu-item {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+  }
+  
+  .side-menu-item:hover {
+    background: #555;
+  }
+  
+  /* Add transitions for smooth opening and closing */
+  .nav-cart {
+    cursor: pointer;
+    /* rest of your styles */
+  }
+  
+
+
+  .close-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem; /* Larger 'X' */
+    padding: 0.5rem; /* Padding around 'X' */
+    margin-bottom: 1rem; /* Space below 'X' */
+    align-self: flex-start; /* Position 'X' to the right */
+    cursor: pointer;
+
+  }
+  
+  .side-menu {
+    /* ... rest of your styles ... */
+    transition: transform 0.5s ease-in-out; /* Increased duration for slower animation */
+  }
+  
+
+
+  #inlineFormInputGroup::placeholder {
+    color: white;
+  }
+
+
+
+  .contact-item{
+      text-align: start;
+  }
+
+  .contact-item:hover {
+    color: #FF7425;
+    transition: 0.3s;
+  }
+  
+
+ 
+
+.social-icon:hover {
+  color: #FF7425;
+  
+}
+
+
+
+
+
+
+
+/* Add this to your existing Navbar.css or create a new file for dropdown.css */
+.nav-item {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background-color: #181818;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 130px;
+  height: auto;
+  text-align: start; /* Center the text inside the dropdown-content */
+
+}
+
+.nav-item:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+width: 100%;
+margin-left: 0;
+}
+
+.dropdown-content a:hover {
+  background-color: #555;
+}
+
+
+
+
+

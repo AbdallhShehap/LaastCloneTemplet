@@ -1,0 +1,168 @@
+.blogPage{
+    background-color: #181818;
+    background-image: url(https://wgl-demo.net/bili/wp-content/uploads/2022/03/bloglist-bg-1-scaled.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-attachment: scroll;
+    background-position: top center;
+    height: auto;
+    width: 100%;
+    z-index: 1;
+}
+
+
+.side-menu {
+   
+    z-index: 2; 
+  }
+
+
+.hover-link{
+    color: #888888 ; 
+    text-decoration: none; 
+}
+
+.hover-link:hover {
+    color: white;
+    text-decoration: none; 
+  }
+
+  /* color: "white",
+                          fontSize: "26px",
+                          fontWeight:"700",
+                          // display: 'flex',
+                          // justifyContent: 'start',
+                          textAlign: "start", */
+  .title-blog {
+    color:white;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: start;
+    text-decoration-line: none;
+    transition: transform 0.9s ease;
+    height: 70px;
+ 
+}
+
+.title-blog:hover {
+    text-decoration-line: underline;
+  
+}
+
+
+.img-blog-card{
+
+    height:100%;
+    min-height: 339px ; 
+    width: 100%;
+    min-width:321px;
+}
+
+
+
+
+
+
+.ReadMoreBlog {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.5s ease;
+  }
+  
+  .ReadMoreBlog:hover::after {
+    content: "+";
+    position: absolute;
+    top: 0;
+    right: 100%;
+    transform: translateX(5px);
+    
+  }
+
+  .ReadMoreBlog:hover {
+    transform: translateX(2rem); 
+  }
+  
+  .ReadMoreBlog:hover::after {
+    transform: translateX(0rem); /* Adjust the value as needed */
+    opacity: 1;
+  }
+
+
+
+
+
+
+@media screen and (max-width: 1250px) {
+    /* .img-blog-card{
+
+        height:300px;
+        max-height: 300px ; 
+        width: 280px;
+        max-width:280px;
+    } */
+}
+
+@media screen and (max-width: 1070px) {
+    /* .img-blog-card{
+
+        height:200px;
+        max-height: 300px ; 
+        width: 180px;
+        max-width:280px;
+    } */
+}
+
+
+
+
+
+  
+.blogcircle-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #56595b;
+  color: white;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+ 
+  cursor: pointer;
+
+  /* bottom: -10px;
+  left: 80px; */
+
+}
+
+.blogcircle-btn:hover {
+  width: 210px;
+  height: 70px;
+  border-radius: 35%;
+  transition: 0.4s;
+}
+
+
+
+.blogcircle-btnspan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+bottom: 2px;
+left: 20px;
+  color: white;
+  transition: all 0.4 ease;
+
+  cursor: pointer;
+
+}
+
+.blogcircle-container:hover .blogcircle-btn {
+  width: 210px;
+  height: 70px;
+  border-radius: 35px;
+  /* transition: 0.4s; */
+}

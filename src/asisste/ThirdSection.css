@@ -1,0 +1,165 @@
+.ThirdSection{
+    height: auto;
+    width: 80%;
+    /* background-color: blue; */
+      /* font-family: 'Rampart One', sans-serif; */
+    
+    /* font-family: 'Young Serif', serif; */
+}
+
+.thirdScircle-btn{
+  width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #56595b;
+    color: white;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+  margin-top: 3rem;
+  cursor: pointer;
+
+}
+
+.thirdScirclebtn:hover {
+  width: 210px;
+    height: 70px;
+    border-radius: 35%;
+    transition: 0.4s;
+  
+}
+
+ 
+.thirdScircle-btnspan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+bottom: 2px;
+left: 32px;
+color: white;
+transition: all 0.4 ease;
+cursor: pointer;
+
+}
+
+
+
+.thirdScircle-container:hover .thirdScircle-btn {
+  width: 205px;
+  height: 70px;
+  border-radius: 35px;
+  /* transition: 0.4s; */
+}
+
+
+
+
+.hover-effect:hover {
+  border-color: orange; 
+  
+}
+
+.hover-effect:hover h3 {
+  color: orange; 
+}
+
+
+.thirdSWhatWeOffer{
+  margin-top: 1rem;
+  color: #d0d0d0;
+}
+
+
+
+
+.thirdcircle-btn {
+  /* width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #56595b;
+  color: white;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative; */
+
+}
+
+.thirdScircle-btn:hover {
+  /* width: 175px;
+  height: 70px;
+  border-radius: 35%;
+  transition: 0.4s; */
+}
+
+
+.thirdScircle-btnspan {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+top: 1px;
+left: 30px;
+  color: white;
+  transition: all 0.4 ease; */
+}
+
+.thirdScircle-container{
+  /* height: 70px; */
+ 
+}
+
+.thirdScircle-container:hover .thirdScircle-btn {
+  /* width: 205px;
+  height: 70px;
+  border-radius: 35%; */
+  /* transition: 0.4s; */
+}
+
+
+
+
+
+.thirdSwordart {
+ 
+  font-family: sans-serif;
+  font-size: 100px;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* padding-left: 0; */
+}
+
+.thirdSwordart.italic-outline {
+    transform: scale(1, 1.3);
+    -webkit-transform: scale(1, 1.3);
+    -moz-transform: scale(1, 1.3);
+    -o-transform: scale(1, 1.3);
+    -ms-transform: scale(1, 1.3);
+  }
+  
+  .thirdSwordart.thirdSitalic-outline .thirdStext {
+    letter-spacing: -0.01em;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    color: transparent;
+    -webkit-text-stroke: 0.01em #888888;
+    filter: progid:DXImageTransform.Microsoft.Glow(Color=#000000, Strength=1);
+    /* text-shadow: 0.03em 0.03em 0 transparent; */
+}
+
+
+
+
+
+

@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Londrina+Shadow&family=Rampart+One&family=Tourney:ital,wght@1,100;1,400&display=swap');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+@font-face {
+  font-family: 'STCaiyun';
+
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/* body {
+  font-family: 'STCaiyun', sans-serif;
+} */
+
+/* Apply the font to specific elements */
+.text {
+  /* font-family: 'STCaiyun', sans-serif; */
+  /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+}
+
+
+/* .row {
+  margin: 0;
+  padding: 0;
+} */
+
+
+.MainBackground{
+  
+
+    
+}
+
+/* 
+
+.col {
+  padding: 0;
+} */
+
+
+.imgicon{
+  width:130px ;
+  max-width: 130px;
+  height: 130px ;
+  max-height: 130px;
+  margin-top: 33px;
+  
+}
+
+.firstText{
+  /* margin-top: 80px; */
+}
+
+
+/* @media (min-width: 2500px) {
+.imgicon{
+  width:125px ;
+  height:150px ;
+  margin-top: 10%;
+}
+} */
+
+
+.vertical-words {
+    writing-mode: vertical-rl; /* Change writing-mode to vertical-rl */
+    text-orientation: upright;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Change to flex-start to make text flow from top to bottom */
+    padding-top: 40px;
+    padding-left: 10px;
+  }
+  
+  .vertical-words > div {
+    margin: 5px 0;
+  }
+  
+
+  .text{
+    /* font-family: 'Bungee Shade', sans-serif;
+    font-family: 'Londrina Shadow', sans-serif; */
+    /* font-family: 'Bungee Shade', sans-serif;
+    font-family: 'Londrina Shadow', sans-serif;
+    font-family: 'Rampart One', sans-serif; */
+    /* font-family: 'Tourney', sans-serif; */
+    /* font-family: 'stoicheion'; */
+/* font-size: 130px  */
+/* font-family: "Tilt Prism"; */
+
+
+  }
+
+
+  .wordart {
+    font-family: Arial, sans-serif;
+    font-size: 100px;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .wordart.italic-outline {
+      transform: scale(1, 1.3);
+      -webkit-transform: scale(1, 1.3);
+      -moz-transform: scale(1, 1.3);
+      -o-transform: scale(1, 1.3);
+      -ms-transform: scale(1, 1.3);
+  }
+  
+  .wordart.italic-outline .text2 {
+      letter-spacing: -0.01em;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 130px;
+      color: transparent;
+      -webkit-text-stroke: 0.01em #f6efef;
+      filter: progid:DXImageTransform.Microsoft.Glow(Color=#000000, Strength=1);
+      text-shadow: 0.03em 0.03em 0 transparent;
+  }
+
+  .wordart.italic-outline .text2 {
+    font-size: 130px;
+  }
+
+  .circle-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #56595b;
+    color: white;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+  }
+  
+  
+  .circle-btn:hover {
+    width: 210px;
+    height: 70px;
+    border-radius: 35%;
+    transition: 0.4s;
+  }
+
+  
+ 
+  .circle-btnspan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+  bottom: 2px;
+  left: 32px;
+  color: white;
+  transition: all 0.4 ease;
+    
+  }
+
+
+
+  .circle-container:hover .circle-btn {
+    width: 175px;
+    height: 70px;
+    border-radius: 35px;
+    /* transition: 0.4s; */
+  }
+
+
+
+
+  
+  .vertical-words {
+    width: 1px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    color: white;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    font-size: medium;
+    font-family: inherit;
+    position: relative;
+    
+  }
+  
+  .vertical-words::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 70%; 
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0); 
+    transform-origin: 0 50%;
+    transition: transform 0.3s;
+  }
+  
+  .vertical-words:hover::before {
+    transform: scaleX(1); 
+  }
+  
+  
+  /* .vertical-words > .text {
+    margin: 5px 0;
+    /* transform-origin: top left; */
+    /* white-space: nowrap;  */
+    /* font-family: 'Tilt Prism', sans-serif;
+    font-size: 120px;
+  }
+    */
+
+
+
+    .HIGH-TEXT{
+      /* text-align: start; */
+    }
+    
+
+@media (min-width: 1600px) {
+  .HIGH-TEXT{
+    margin-left: 5%;
+  }
+ 
+}
+
+@media (min-width: 1400px)  {
+  .wordart.italic-outline .text2 {
+    font-size: 120px;
+  }
+  .imgicon{
+    width:120px ;
+    max-width: 120px;
+    height: 120px ;
+    max-height: 120px;
+    margin-top: 0;
+    
+  }
+ 
+}
+
+
+@media (max-width: 1478px)  {
+  .wordart.italic-outline .text2 {
+    font-size: 120px;
+  }
+  .imgicon{
+    width:120px ;
+    max-width: 120px;
+    height: 120px ;
+    max-height: 120px;
+    margin-top: 0;
+    
+  }
+ 
+}
+
+
+@media (min-width: 1900px) {
+  .firstText{
+    /* margin-top: 70px; */
+ 
+}
+
+/* .circle-btn {
+
+  transition: transform 0.3s ease;
+  position: absolute;
+ 
+ 
+  bottom: -8px;
+  left: 110px;
+
+} */
+
+}
+    
+
+@media (min-width: 2490px) {
+ 
+
+/* .circle-btn {
+
+  transition: transform 0.3s ease;
+  position: absolute;
+ 
+ 
+  bottom: -3px;
+  left: 130px;
+
+} */
+
+}
+
+
+

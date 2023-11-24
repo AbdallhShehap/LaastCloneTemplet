@@ -1,0 +1,194 @@
+.all{
+    width: 80%;
+    height: auto;
+  }
+  
+  .FourSection{
+    position: relative;
+    margin-bottom: 100px;
+   
+
+}
+
+.slide-description{
+  padding:3rem;
+  font-size: 28px;
+  color: white;
+  
+  
+}
+
+.cont{
+    height: 90%;
+    width: 100%;
+   /* margin-left: 5%; */
+   margin-top: 4%;
+   position: relative;
+}
+
+.slider-container {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+  }
+  
+.right-part{
+
+    width: 100px;
+
+}
+
+
+  .slider-part {
+    flex: 1;
+    padding: 2rem;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: start; */
+  }
+  
+  .left-part {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .left-part img {
+    width: 10rem;
+    min-width: 10rem;
+    height: 10rem;
+    min-height: 10rem;
+    border-radius: 50%;
+    padding: 10px;
+    
+   
+  
+  }
+  
+
+
+  /* Add the following CSS to your stylesheet */
+.carousel-controls-left-4 {
+    position: absolute; /* Position the button relative to .FourSection */
+    right: 68%; 
+    bottom: 0;
+    transform: translateY(-50%);
+    /* background-color: blue; */
+
+}
+  
+.carousel-controls-left-4 button {
+    background: transparent;
+    border: none;
+    z-index: 1;
+    font-size: 34px;
+    color: #ffffff; /* Set the color you prefer */
+    cursor: pointer;
+    background-color: rgb(141, 141, 147);
+    border: #ccc 1px;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    transform: translateY(-50%);
+  
+   
+    transform: translateY(-50%);
+}
+  
+  .carousel-controls-left-4 button:disabled {
+    color: #ccc; /* Set a disabled color */
+    cursor: not-allowed;
+  }
+  
+
+    /* Add the following CSS to your stylesheet */
+.carousel-controls-right-4 {
+    position: absolute; /* Position the button relative to .FourSection */
+    right: 63%; 
+    bottom: 0;
+    transform: translateY(-50%);
+  
+  
+}
+  
+.carousel-controls-right-4 button {
+    background: transparent;
+    border: none;
+    z-index: 1;
+    font-size: 34px;
+    color: #faf3f3; /* Set the color you prefer */
+    cursor: pointer;
+    background-color: rgb(141, 141, 147);
+    border: #ccc 1px;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    transform: translateY(-50%);
+}
+  
+  .carousel-controls-right-4 button:disabled {
+    color: #ccc; /* Set a disabled color */
+    cursor: not-allowed;
+  }
+
+  .carousel-controls-right-4 button:hover {
+    background-color: rgb(128, 128, 126); /* Change the text color to orange on hover */
+}
+
+  .carousel-controls-left-4 button:hover {
+    background-color: rgb(128, 128, 126); /* Change the text color to orange on hover */
+}
+
+
+
+/* Add a border to the left side of the text container */
+.right-part {
+    border-left: 1px solid rgb(136, 135, 134); /* Adjust the width and color as needed */
+    padding-left: 7rem; /* Add some spacing between the border and text */
+}
+
+/* Adjust the text alignment and other styles if needed */
+.slider-part.right-part {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.under-carousel{
+    width: 80%;
+    height: 10%;
+   
+   
+}
+.row{
+   
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    /* margin-left: 3rem; */
+
+}
+
+
+
+
+
+
+@media (min-width: 1600px) {
+  .center1600{
+    margin-left: 5%;
+    
+  }
+ 
+}

@@ -1,0 +1,152 @@
+.FirstSection{
+  height: auto;
+  
+  
+  
+}
+.MainBackground{
+  
+  /* background-image: url(../images//background.png);
+  background-repeat: no-repeat;
+  background-size: cover; */
+
+}
+
+.Part2FirstSection{
+ 
+}
+
+
+/* YourStyles.css */
+.two-column-container {
+
+}
+
+.left-side {
+  color: white;
+
+  height: 100%;
+}
+
+/* Add margin to the section titles */
+.Read {
+  margin-bottom: 1rem;
+}
+/* Update the section content */
+.section-content {
+  max-height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: max-height 0.7s ease, opacity 0.7s ease, visibility 0.7s ease;
+  overflow: hidden; /* Add this to prevent content from spilling out */
+  margin-bottom: 2rem;
+  cursor: pointer;
+
+}
+
+.section-content.show {
+  max-height: 500px; /* This is an arbitrary value; set it to what you need */
+  visibility: visible;
+  opacity: 1;
+  transition: max-height 0.1s ease 0.1s, opacity 0.1s ease, visibility 0.3s ease; /* Delay max-height */
+  margin-left: 25px;
+  color: #888888;
+  cursor: pointer;
+
+}
+
+/* You can remove this class if it's no longer used */
+.section-content.hide {
+  opacity: 0;
+}
+
+
+/* It's important to add a wrapper around your sections to prevent them from affecting the layout when they expand */
+.section-wrapper {
+  overflow: hidden;
+}
+
+
+
+
+  
+  .right-side {
+    cursor: pointer;
+
+  display: flex;
+  justify-content: start;
+  }
+
+  .right-side-img{
+    height: 706;
+    max-height: 706;
+    width: 580px;
+    max-width:580px;
+   
+    cursor: pointer;
+
+    
+  }
+
+
+  @media screen and (max-width: 1430px) {
+    .right-side-img{
+      height: 706;
+      width: 580px;
+      
+     
+      
+      
+    }
+  }
+
+  
+  .left-side p {
+    margin: 0; /* Remove default margins on paragraphs */
+    /* font-family: 'Bungee Shade, sans-serif'; */
+    /* font-family: 'Londrina Shadow sans-serif'; */
+  }
+  
+
+  .Read.active{
+    color: #FF7425 !important;
+    transition: 0.9s;
+  }
+
+  .section-content {
+    opacity: 0;
+    transition: opacity 0.9s ease;
+  }
+  
+  .section-content.show {
+    opacity: 1;
+    font-family:sans-serif;
+    max-width: 400px;
+  }
+  
+  .section-content.hide {
+    opacity: 0;
+  }
+  
+  .read-more-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease; 
+    margin-bottom: 2rem;
+  }
+  
+  .read-more-content.open {
+    max-height: 100px; 
+  }
+  
+
+  .rotate180 {
+    transform: rotate(180deg);
+    transition: transform 0.9s ease;
+  }
+  
+
+
+
+
+  
