@@ -81,7 +81,7 @@ export default function FourSection() {
                         <p style={{ fontSize: "2rem", color: "white" }}>
                           {slide.name}
                         </p>
-                        <p style={{ fontSize: "1rem", color: "orange" }}>
+                        <p style={{ fontSize: "1rem", color: "#FF7425" }}>
                           {slide.subname}
                         </p>
                       </div>

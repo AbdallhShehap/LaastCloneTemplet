@@ -230,7 +230,7 @@ export default function FiveSectionSlider() {
 
                     <p style={{color:"white", fontSize:'18px',display:"flex", justifyContent:"start" , textAlign:'start' }} > {product.title}</p>
 
-                    <p className="subtitle" style={{color:"orange", fontSize:'18px', fontWeight:"500", display:"flex", justifyContent:"start" }}>{product.subtitle}</p>
+                    <p className="subtitle" style={{color:"#FF7425", fontSize:'18px', fontWeight:"500", display:"flex", justifyContent:"start" }}>{product.subtitle}</p>
 
                   </div>
                 </div>
