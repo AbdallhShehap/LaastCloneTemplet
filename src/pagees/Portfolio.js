@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "../asisste/portfolio.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
 import Menu from "../componnet/Menu";
 import Footer from "../componnet/Footer";
 
 export default function Blog() {
-  const [selectedCategory, setSelectedCategory] = useState("ALL");
+  // const [selectedCategory, setSelectedCategory] = useState("ALL");
+
+  const location = useLocation();
+  const [selectedCategory, setSelectedCategory] = useState('ALL');
+
+
+
 
   const caseStadyData = [
     {
@@ -123,10 +129,28 @@ export default function Blog() {
         );
 
 
-         // Initialize AOS
-  useEffect(() => {
-    AOS.init({ duration: 1000 }); // You can customize the duration
-  }, []);
+  //        // Initialize AOS
+  // useEffect(() => {
+  //   AOS.init({ duration: 1000 }); // You can customize the duration
+  // }, []);
+
+
+
+   useEffect(() => {
+    // Get the selected category from localStorage
+    const storedCategory = sessionStorage.getItem('selectedCategory');
+
+    // If there is a category in localStorage, use it; otherwise, default to 'ALL'
+    setSelectedCategory(storedCategory || 'ALL');
+
+    // Initialize AOS on component mount and route change
+    AOS.init({ duration: 1000 });
+
+    // Cleanup AOS on component unmount
+    return () => {
+      AOS.refresh(); // Refresh AOS when the component is unmounted
+    };
+  }, [location.pathname]); 
 
   return (
     <>

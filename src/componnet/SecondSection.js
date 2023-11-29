@@ -98,25 +98,32 @@ import { Link } from "react-router-dom";
 
 const SecondSection = () => {
 
-
+  // Assuming you have a function to handle the click event
+  const handleClick = (category) => {
+    // Save the selected category in localStorage
+    sessionStorage.setItem('selectedCategory', category);
+  };
 
 const dataArray = [
   {
     image: image1,
     topText: 'DEVELOPMENT | TECHNOLOGY',
     bottomText: 'TECHNOLOGY PROCESS',
+    category: "DEVELOPMENT",
     link:'portfolio'
   },
   {
     image: image2,
     topText: 'TECHNOLOGY',
     bottomText: 'UI FOR MUSIC WEBSITE',
-    link:'blog'
+    category: "DESIGN",
+    link:'portfolio'
   },
   {
     image: image3,
-    topText: 'DEVELOPMENT | DESIGN',
+    topText: 'DESIGN',
     bottomText: 'WEBSITE FOR AGEN',
+    category: "TECHNOLOGY",
     link:'portfolio'
   },
 ];
@@ -125,7 +132,7 @@ const dataArray = [
       {dataArray.map((item, index) => (
         
         <div className='image-container' key={index}>
-          <Link className='Link' to={item.link}>
+          <Link className='Link' to={item.link} onClick={() => handleClick(item.category)}>
           <img className={`img img${index + 1}`} src={item.image} width="100%" />
         </Link>
 
@@ -134,7 +141,7 @@ const dataArray = [
               <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-2"></div>
              
               <div className='col-sm-11 col-md-11 col-lg-11 col-xl-11 col-xxl-7 HIGH-TEXT'>
-              <Link  className='Link'to={item.link}>
+              <Link className='Link' to={item.link} onClick={() => handleClick(item.category)}>
                 <div className='top-text'>{item.topText}</div>
                 <div className='bottom-text'>{item.bottomText}</div>
 
