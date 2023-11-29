@@ -375,12 +375,7 @@ function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 
-  const menuItems = [
-    { path: "/page1", label: "Page 1" },
-    { path: "/page2", label: "Page 2" },
-    { path: "/ourmission", label: "Our Mission" },
-    // Add more items here as needed
-  ];
+
 
 
 
@@ -455,14 +450,17 @@ function Navbar() {
       {/* Alternate menu content here */}
       <nav className="navbar container-fluid">
       <div className="nav-brand">
+      <Link to="/">
+
         <img
           src="https://wgl-demo.net/bili/wp-content/uploads/2022/03/logo-1.png"
           alt="Your Logo"
         />
+      </Link>
       </div>
       <div className="nav-items">
   <Link to="/">HOME</Link>
-  <span className="nav-item" onMouseLeave={closeDropdown}>
+  {/* <span className="nav-item" onMouseLeave={closeDropdown}>
           <Link
             to="/ourmission"
             onMouseOver={toggleDropdown}
@@ -471,20 +469,41 @@ function Navbar() {
             PAGES
           </Link>
           {isDropdownOpen && (
-             <div className="dropdown-content">
-             {menuItems.map((item, index) => (
-               <Link key={index} to={item.path}>{item.label}</Link>
-             ))}
-           </div>
+            <div className="dropdown-content">
+              <Link to="/page1">Page 1</Link>
+              <Link to="/page2">Page 2</Link>
+              <Link to="/ourmission">Our Mission</Link>
+            </div>
           )}
-        </span>
+        </span> */}
 
+
+  <span className="dropdown" >
+          <Link
+            to=""
+            onMouseOver={toggleDropdown}
+            className=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          >
+            PAGES
+          </Link>
+        
+             <div className="dropdown-menu newDropdown" style={{backgroundColor:"#181818", border:"1px", boxShadow:"1px", marginLeft:"130px"}} aria-labelledby="dropdownMenuButton">
+             {/* {menuItems.map((item, index) => (
+               <Link className="dropdown-item" key={index} to={item.path}>{item.label}</Link>
+             ))} */}
+                <Link  className="dropdown-item newDropdownItem" to="/blog" style={{marginLeft:"0px"}}>BLOG</Link>
+              <Link  className="dropdown-item newDropdownItem" to="/ourmission"style={{marginLeft:"0px"}}>OUR MISSION</Link>
+              <Link  className="dropdown-item newDropdownItem" to="/portfolio"style={{marginLeft:"0px"}}>PORTFOLIO</Link>
+              <Link  className="dropdown-item newDropdownItem" to="/contactus"style={{marginLeft:"0px"}}>CONTACT US</Link>
+           </div>
+    
+        </span>
 
         
   <Link to="/blog">BLOG</Link>
   <Link to="/portfolio">PORTFOLIO</Link>
-  <Link to="/shop">SHOP</Link>
-  <Link to="/contacts">CONTACTS</Link>
+  <Link to="/ourmission">OUR MISSION</Link>
+  <Link to="/contactus">CONTACTS</Link>
 
  
 </div>
@@ -510,6 +529,9 @@ function Navbar() {
               <div className="col-10"
                 style={{ display: "flex", justifyContent: "start" }}
               >
+
+<Link to="/">
+
                 <img
                   src="https://wgl-demo.net/bili/wp-content/uploads/2022/03/logo-1.png"
                   alt="Your Logo"
@@ -517,6 +539,7 @@ function Navbar() {
                   width="50px"
                   style={{ padding: "0", margin: "0" }}
                 />
+</Link>
               </div>
 
               <div className="col-1"></div>
@@ -672,14 +695,18 @@ function Navbar() {
 
     <nav className="navbar container-fluid">
       <div className="nav-brand">
+
+      <Link to="/">
+
         <img
           src="https://wgl-demo.net/bili/wp-content/uploads/2022/03/logo-1.png"
           alt="Your Logo"
         />
+</Link>
       </div>
       <div className="nav-items">
   <Link to="/">HOME</Link>
-  <span className="nav-item" onMouseLeave={closeDropdown}>
+  {/* <span className="nav-item" onMouseLeave={closeDropdown}>
           <Link
             to="/ourmission"
             onMouseOver={toggleDropdown}
@@ -691,18 +718,37 @@ function Navbar() {
             <div className="dropdown-content">
               <Link to="/page1">Page 1</Link>
               <Link to="/page2">Page 2</Link>
-              {/* Add more pages as needed */}
               <Link to="/ourmission">Our Mission</Link>
             </div>
           )}
-        </span>
+        </span> */}
 
+<span className="dropdown" >
+          <Link
+           
+            onMouseOver={toggleDropdown}
+            className=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          >
+            PAGES
+          </Link>
+        
+             <div className="dropdown-menu newDropdown" style={{backgroundColor:"#181818", border:"1px", boxShadow:"1px", marginLeft:"130px"}} aria-labelledby="dropdownMenuButton">
+             {/* {menuItems.map((item, index) => (
+               <Link className="dropdown-item" key={index} to={item.path}>{item.label}</Link>
+             ))} */}
+              <Link  className="dropdown-item newDropdownItem" to="/blog" style={{marginLeft:"0px"}}>BLOG</Link>
+              <Link  className="dropdown-item newDropdownItem" to="/ourmission"style={{marginLeft:"0px"}}>OUR MISSION</Link>
+              <Link  className="dropdown-item newDropdownItem" to="/portfolio"style={{marginLeft:"0px"}}>PORTFOLIO</Link>
+              <Link  className="dropdown-item newDropdownItem" to="/contactus"style={{marginLeft:"0px"}}>CONTACT US</Link>
+           </div>
+    
+        </span>
 
         
   <Link to="/blog">BLOG</Link>
   <Link to="/portfolio">PORTFOLIO</Link>
-  <Link to="/shop">SHOP</Link>
-  <Link to="/contacts">CONTACTS</Link>
+  <Link to="/ourmission">OUR MISSION</Link>
+  <Link to="/contactus">CONTACTS</Link>
 
  
 </div>

@@ -11,12 +11,12 @@
   top: 0;
   right: 100%;
   transform: translateX(5px);
-  color: orange !important; /* Add !important */
+  color: #FF7425 !important;
 }
 
 .custom-link:hover {
   transform: translateX(2rem);
-  color: orange !important; /* Add !important */
+  color: #FF7425 !important;
 }
 
 .custom-link:hover::before {
@@ -35,6 +35,6 @@
 
 
 .social-icon:hover {
-    color: orange !important;
+  color: #FF7425 !important;
   }
   

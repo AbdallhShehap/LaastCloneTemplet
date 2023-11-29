@@ -158,7 +158,7 @@ export default function Blog() {
                       <p
                         className="ReadMoreBlog"
                         style={{
-                          color: "orange",
+                          color:" #FF7425",
                           fontSize: "18px",
                           fontWeight: "500",
                           textAlign: "start",

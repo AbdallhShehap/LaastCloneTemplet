@@ -94,6 +94,7 @@ import '../asisste/SecondSection.css';
 import image1 from '../images/1qwe.png';
 import image2 from '../images/2qwe.png';
 import image3 from '../images/3qwe.png';
+import { Link } from "react-router-dom";
 
 const SecondSection = () => {
 
@@ -104,36 +105,46 @@ const dataArray = [
     image: image1,
     topText: 'DEVELOPMENT | TECHNOLOGY',
     bottomText: 'TECHNOLOGY PROCESS',
+    link:'portfolio'
   },
   {
     image: image2,
     topText: 'TECHNOLOGY',
     bottomText: 'UI FOR MUSIC WEBSITE',
+    link:'blog'
   },
   {
     image: image3,
     topText: 'DEVELOPMENT | DESIGN',
     bottomText: 'WEBSITE FOR AGEN',
+    link:'portfolio'
   },
 ];
   return (
     <div className='SecondSection'>
       {dataArray.map((item, index) => (
+        
         <div className='image-container' key={index}>
+          <Link className='Link' to={item.link}>
           <img className={`img img${index + 1}`} src={item.image} width="100%" />
+        </Link>
 
           <div className='text-overlay container-fluid g-0'>
             <div className='row g-0'>
               <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-2"></div>
              
               <div className='col-sm-11 col-md-11 col-lg-11 col-xl-11 col-xxl-7 HIGH-TEXT'>
+              <Link  className='Link'to={item.link}>
                 <div className='top-text'>{item.topText}</div>
                 <div className='bottom-text'>{item.bottomText}</div>
+
+              </Link>
               </div>
               <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-3"></div>
             </div>
           </div>
         </div>
+        
       ))}
     </div>
   );

@@ -1,0 +1,33 @@
+.contactPage{
+    background-color: #181818;
+    background-image: url(https://wgl-demo.net/bili/wp-content/uploads/2022/03/contacts-bg-scaled.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-attachment: scroll;
+    background-position: top center;
+    height: auto;
+    width: 100%;
+    z-index: 1;
+}
+
+
+.side-menu {
+   
+    z-index: 2; 
+  }
+
+
+
+  @media (min-width: 1600px) {
+    .contactDetailes{
+      margin-left: 5%;
+    }
+   
+  }
+  
+@media screen and (min-width: 1720px) {
+    /* .contactDetailes{
+     margin-left: 20%; 
+      
+    } */
+  }

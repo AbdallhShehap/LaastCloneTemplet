@@ -3,6 +3,11 @@
     width: 100%;
 }
 
+.Link{
+  text-decoration: none;
+  color: white;
+}
+
 
 .img {
   height: auto; 

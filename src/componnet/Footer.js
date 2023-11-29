@@ -29,10 +29,7 @@ export default function Footer() {
                   <img src="https://wgl-demo.net/bili/wp-content/uploads/2022/03/logo-1.png" width="70px" height="80px"  />
                 </MDBCol>
 
-                <MDBCol
-                  md="3"
-                  lg="2"
-                  xl="2"
+                <MDBCol md="3" lg="2" xl="2"
                   className="mx-auto mb-4"
                   style={{ color: "white" }}
                 >
@@ -59,10 +56,7 @@ export default function Footer() {
                   </p>
                 </MDBCol>
 
-                <MDBCol
-                  md="3"
-                  lg="2"
-                  xl="2"
+                <MDBCol md="3" lg="2" xl="2"
                   className="mx-auto mb-4"
                   style={{ color: "white" }}
                 >
@@ -73,19 +67,23 @@ export default function Footer() {
                   <p>bili@mail.com</p>
                 </MDBCol>
 
-                <MDBCol
-                  md="4"
-                  lg="2"
-                  xl="3"
+                <MDBCol md="4" lg="2" xl="3"
                   className="mx-auto mb-4"
                   style={{ color: "white" }}
                 >
                   <h6 className="text-uppercase fw-bold mb-4">Subscribe</h6>
-                  <p>
-                    <MDBIcon icon="home" className="me-2" />
-                    Get news & updates
-                  </p>
-                  <hr />
+                  <input
+                      type="text"
+                      className="form-control"
+                      id="inlineFormInputGroup"
+                      placeholder="Get news & updates"
+                      style={{
+                        backgroundColor: "black",
+                        border: "none",
+                        color: "white",
+                      }}
+                    />
+                  
                   <p style={{ color: "#888888" }}>
                     Our expertise, as well as our passion for web design, sets
                     us apart from other agencies.

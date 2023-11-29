@@ -1,0 +1,291 @@
+
+/* 
+input:focus{
+   outline: none;
+}
+
+form{
+   width:100%;
+   margin-left:auto;
+   margin-right:auto;
+   padding:50px;
+   background:rgb(33, 33, 33);
+   border-radius:5px;
+   position:relative;
+   font-family: 'Libre Franklin', sans-serif;
+}
+
+form > div {
+   float:left;margin-bottom:30px;
+}
+form > div > p{
+   font-size: 12px;margin-bottom: 3px;
+}
+form > div > input{
+   font-size:12px;letter-spacing:1px;padding:  5px;border: 0;background:  whitesmoke;border-bottom: 1px solid silver;width: 100%;color: gray;
+}
+
+form > p:last-of-type{
+   text-align: center;padding-top: 50px;display:  table;width: 100%;color:white;
+}
+
+form > p:last-of-type > a{
+   cursor:pointer;border:0;
+   padding: 10px 25px;
+   background:  silver;
+   border-radius:  28px;
+   font-size: 12px; 
+}
+
+.term{
+   padding-top:40px;display: flex;width:  100%;align-items:  center;
+}
+
+.term > i{
+   cursor:pointer;width:20px;
+}
+
+.term > span{
+   font-size:12px;
+}
+
+/* delete */
+/* form > a:last-of-type{
+   position:absolute;
+   bottom: 10px;
+   right: 15px;
+   font-size:  10px;
+   letter-spacing:  1px;
+   font-style: italic;
+} */
+
+
+form{
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  padding:20px;
+  background:rgb(33, 33, 33);
+  border-radius:5px;
+  position:relative;
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+  
+  
+.contactcircle-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #FF7425;
+  color: white;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+ 
+  cursor: pointer;
+
+  /* bottom: -10px;
+  left: 80px; */
+
+}
+
+.contactcircle-btn:hover {
+  width: 210px;
+  height: 70px;
+  border-radius: 35%;
+  transition: 0.4s;
+}
+
+
+
+.contactcircle-btnspan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+bottom: 2px;
+left: 20px;
+  color: white;
+  transition: all 0.4 ease;
+
+  cursor: pointer;
+
+}
+
+.contactcircle-container:hover .contactcircle-btn {
+  width: 195px;
+  height: 70px;
+  border-radius: 35px;
+  /* transition: 0.4s; */
+}
+
+
+
+
+
+
+
+
+.form-control {
+  background-color: transparent !important; /* Ensure that the background is not changed */
+}
+
+
+
+.form-group.input-material {
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+.form-group.input-material label {
+  color: #a0a0a0;
+  font-size: 16px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  bottom: 1px;
+  transition: 0.5s ease all;
+}
+
+.form-group.input-material  .form-control:focus ~ label,
+.form-group.input-material .form-control[value]:not([value=""]) ~ label {
+  bottom: 100%; /* Move the label up when the input is focused or has content */
+  font-size: 14px;
+  color: #fff; /* Change the label color to white */
+}
+
+.form-control,
+.form-select {
+  border: none; 
+  border-bottom: 2px solid #a0a0a0; 
+  background-color: transparent;
+  padding-left: 5px;
+  box-shadow: none;
+  transition: border-color 0.3s ease;
+  outline: none; 
+  color: white;
+ 
+}
+
+.form-control:required ~ label::after {
+  content: '*';
+  color: #fcf9f9;
+  padding-left: 2px;
+  font-size: 0.8em;
+}
+
+
+
+.form-control:focus,
+.form-control[value]:not([value=""]) {
+  border: none; 
+  border-bottom: 2px solid white !important;
+  box-shadow: none !important;
+  color: #f8f8f8;
+}
+
+.form-control:hover {
+  caret-color: white; /* Change the cursor indicator color */
+}
+
+
+.form-control:focus ~ label,
+.form-control[value]:not([value=""]) ~ label {
+  top: unset;
+  bottom: 100%;
+  bottom: calc(100% - 16px);
+  font-size: 14px;
+  /* color: #007bff; */
+  font-weight: 500;
+}
+
+.form-control.invalid,
+.invalid,
+.form-control:focus.parsley-error,
+.form-control[value]:not([value=""]).parsley-error {
+  border-bottom-color: #dc3545;
+}
+
+.form-control.invalid ~ label,
+.invalid ~ label,
+.form-control:focus.parsley-error ~ label,
+.form-control[value]:not([value=""]).parsley-error ~ label {
+  color: #dc3545;
+}
+
+.form-select {
+  background-position: right 0 center;
+  padding-left: 0;
+}
+
+.parsley-errors-list {
+  color: #dc3545;
+  list-style: none;
+  font-size: 0.7em;
+  padding-left: 5px;
+  position: absolute;
+  top: 107%;
+}
+
+
+
+
+
+@media screen and (min-width: 2000px) {
+ 
+.titleFirstSContact{
+width: 450px;
+}
+}
+
+@media screen and (min-width: 2200px) {
+ 
+.titleFirstSContact{
+width: 550px;
+}
+}
+
+
+
+.contact2{
+  width: 100% ;
+  padding-top:50px ;
+  padding-left: 30px;
+
+  
+  
+}
+
+
+@media screen and (min-width: 2000px) {
+
+  .contact2{
+
+    padding-left: 50px;
+  
+    
+    
+  }
+  
+  }
+  
+
+
+@media screen and (min-width: 2350px) {
+
+  .contact2{
+
+    padding-left: 60px;
+  
+    
+    
+  }
+  
+  }
+  
