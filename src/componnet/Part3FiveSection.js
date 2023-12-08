@@ -1,49 +1,69 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import '../asisste/MarqueeLast.css'
+import axios from 'axios';
 import Marquee from "react-fast-marquee";
 
 export default function Part3FiveSection() {
 
-  const marqueeLastItems = [
-    {
-      title: 'LATEST CASES 1',
-      image: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/arrow_orange.png',
-      
-    },
-    {
-      title: 'LATEST CASES 2',
-      image: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/arrow_orange.png',
-      
-    },
-    {
-      title: 'LATEST CASES 3',
-      image: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/arrow_orange.png',
-      
-    },
-    {
-      title: 'LATEST CASES 4',
-      image: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/arrow_orange.png',
-      
-    },
-  ];
+  const [marqueeItems, setMarqueeItems] = useState([]);
+  const [topItems, setTopItems] = useState([]);
+  const [bottomItems, setBottomItems] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from the API using Axios
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:1010/thirdmarquee/thirdmarquee');
+        // Assuming the response data is an array of objects with 'title' and 'image' properties
+        console.log(response.data[0])
+        setMarqueeItems(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    const fetchDataTopCircle = async () => {
+      try {
+        const responseTopCircle = await axios.get('http://localhost:1010/thirdmarquee/topcircleimg');
+        // Assuming the response data is an array of objects with 'title' and 'image' properties
+        console.log(responseTopCircle.data[0])
+        setTopItems(responseTopCircle.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    const fetchDataBottomCircle = async () => {
+      try {
+        const responseTopCircle = await axios.get('http://localhost:1010/thirdmarquee/bottomcircleimg');
+        // Assuming the response data is an array of objects with 'title' and 'image' properties
+        console.log(responseTopCircle.data[0])
+        setBottomItems(responseTopCircle.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+    fetchDataTopCircle();
+    fetchDataBottomCircle();
+  }, []);
+
+
+
   return (
     <div className="Part3FivetSection">
-      <div className="top-circles">
-
-        <div className="circle circle1"> 
-        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShsXzXaqNuX1q93MJooC4o4bcvFhTx04x1WQ&usqp=CAU' style={{width:"100%" , height:"100%", borderRadius: '50%'}}/>
-        
-        </div>
-
-        <div className="circle circle2"> 
-        <img src='https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528' style={{width:"100%" , height:"100%", borderRadius: '50%'}}/>
-        </div>
-
-        <div className="circle circle3"> 
-        <img src='https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528' style={{width:"100%" , height:"100%", borderRadius: '50%'}}/>
-        
-        </div>
-
+        {/* <img src={`http://localhost:1010/${topItems.topCircleImg1Path}`} style={{width:"100%" , height:"100%", borderRadius: '50%'}}/> */}
+        <div className="top-circles">
+        {topItems.map((item, index) => (
+          <div key={index} className={`circle circle${index + 1}`}>
+            <img 
+              src={`http://localhost:1010/${item.topCircleImgPath}`} 
+              style={{width:"100%" , height:"100%", borderRadius: '50%'}}
+              alt={`Circle ${index + 1}`}
+            />
+          </div>
+        ))}
       </div>
 
 
@@ -54,12 +74,14 @@ export default function Part3FiveSection() {
           speed={70}
           pauseOnHover={false}
          >
-      {marqueeLastItems.map((item, index) => (
+      {marqueeItems.map((item, index) => (
         <React.Fragment key={index}>
           <p className="textMarqueeLast" style={{ color: 'white' }}>
-            {item.title}
+            {item['title-third-marquee']}
               <img
-                src={item.image}
+            src={`http://localhost:1010/${item.imageThirdMarqueePath}`}
+
+               
                 alt={item.title}
                 height="70px"
                 width="70px"
@@ -74,9 +96,16 @@ export default function Part3FiveSection() {
 
 
 
-      <div className="bottom-circles">
-        <div className="circle circle4"><img src='https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528' style={{width:"100%" , height:"100%", borderRadius: '50%'}}/></div>
-        <div className="circle"><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShsXzXaqNuX1q93MJooC4o4bcvFhTx04x1WQ&usqp=CAU' style={{width:"100%" , height:"100%", borderRadius: '50%'}}/></div>
+    <div className="bottom-circles">
+        {bottomItems.map((item, index) => (
+          <div key={index} className={`circle circle4`}> {/* Adjusted class name for unique styling */}
+            <img 
+              src={`http://localhost:1010/${item.bottomCircleImgPath}`} 
+              style={{width:"100%" , height:"100%", borderRadius: '50%'}}
+              alt={`Bottom Circle ${index + 1}`}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

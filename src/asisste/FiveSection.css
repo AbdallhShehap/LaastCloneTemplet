@@ -35,6 +35,27 @@
   }
 
 
+.parent-hover {
+  color: #888888;
+  font-size: 18px;
+  display: flex;
+  justify-content: start;
+  font-weight: 600 ;
+  font-family:sans-serif;
+  cursor:default;
+}
+
+.link-hover{
+  text-decoration:none ;
+
+  color:#888888
+}
+
+
+.parent-hover:hover .link-hover {
+  color: white;
+}
+
   
 @media (min-width: 1600px) {
   .product-slider{

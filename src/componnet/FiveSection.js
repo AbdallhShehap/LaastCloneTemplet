@@ -27,7 +27,7 @@ export default function FiveSection() {
             }}
           >
             <p
-              style={{ color: "#888888", fontSize: "20px", fontWeight: "600", fontFamily:"sans-serif" }}
+              style={{ color: "#888888", fontSize: "20px", fontWeight: "600", fontFamily:"sans-serif", cursor:'default' }}
             >
               Check Our Company Inside Story
             </p>
@@ -45,7 +45,7 @@ export default function FiveSection() {
               alignItems: "start",
             }}
           >
-            <h2 style={{ color: "white", fontFamily:"sans-serif" }}>Check Our Company Inside Story</h2>
+            <h2 style={{ color: "white", fontFamily:"sans-serif",cursor:'default' }}>Check Our Company Inside Story</h2>
           </Col>
 
           <Col xs={5} md={5} xl={2} xxl={2}>
@@ -67,7 +67,7 @@ export default function FiveSection() {
         <Row>
           <Col xs={1} md={1} xl={1} xxl={2}></Col>
 
-          <Col xs={10} md={10} xl={10} xxl={8} className="center1600">
+          <Col xs={10} md={10} xl={10} xxl={8} className="center1600" >
             <FiveSectionSlider />
           </Col>
 
@@ -75,7 +75,7 @@ export default function FiveSection() {
         </Row>
       </Container>
 
-      <div style={{ marginTop: "100px" }}>
+      <div style={{ marginTop: "100px",cursor:'default' }}>
         <Part3FiveSection />
       </div>
     </>

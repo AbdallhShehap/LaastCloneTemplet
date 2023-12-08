@@ -116,76 +116,97 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../asisste/FiveSection.css';
 import Carousel from 'react-bootstrap/Carousel';
+import { Link } from "react-router-dom";
 
 export default function FiveSectionSlider() {
-  const products = [
-    {
-      id: 1,
-      date:'March 23, 2022',
-      title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 1',
-      subtitle: 'Read more 1',
-      imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-1-1-740x700.jpg',
-    },
-    {
-      id: 2,
-      date:'March 23, 2022',
-      title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 2',
-      subtitle: 'Read more 2',
-      imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-3-740x700.jpg',
-    },
-    {
-      id: 3,
-      date:'March 23, 2022',
-      title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 3',
-      subtitle: 'Read more 3',
-      imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-5-740x700.jpg',
-    },
-    {
-      id: 4,
-      date:'March 23, 2022',
-      title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 4',
-      subtitle: 'Read more 4',
-      imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-2-1-740x700.jpg',
-    },
-    {
-      id: 5,
-      date:'March 23, 2022',
-      title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 5',
-      subtitle: 'Read more 5',
-      imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-6-740x700.jpg',
-    },
-    {
-      id: 6,
-      date:'March 23, 2022',
-      title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 6',
-      subtitle: 'Read more 6',
-      imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-4-740x700.jpg',
-    },
-    {
-        id: 7,
-        date:'March 23, 2022',
-        title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 4',
-        subtitle: 'Read more 4',
-        imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-7-740x700.jpg',
-      },
-      {
-        id:8,
-        date:'March 23, 2022',
-        title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 5',
-        subtitle: 'Read more 5',
-        imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-8-740x700.jpg',
-      },
-      {
-        id: 9,
-        date:'March 23, 2022',
-        title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 6',
-        subtitle: 'Read more 6',
-        imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-3-740x700.jpg',
-      },
-  ];
+const [products, setProducts] = useState([])
+
+
+useEffect(() => {
+  // Fetch data from the API using Axios
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:1010/newsslider/newsslide');
+      // Assuming the response data is an array of objects with 'title' and 'image' properties
+      console.log(response.data[0])
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  fetchData();
+}, []);
+
+  // const products = [
+  //   {
+  //     id: 1,
+  //     date:'March 23, 2022',
+  //     title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 1',
+  //     subtitle: 'Read more 1',
+  //     imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-1-1-740x700.jpg',
+  //   },
+  //   {
+  //     id: 2,
+  //     date:'March 23, 2022',
+  //     title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 2',
+  //     subtitle: 'Read more 2',
+  //     imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-3-740x700.jpg',
+  //   },
+  //   {
+  //     id: 3,
+  //     date:'March 23, 2022',
+  //     title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 3',
+  //     subtitle: 'Read more 3',
+  //     imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-5-740x700.jpg',
+  //   },
+  //   {
+  //     id: 4,
+  //     date:'March 23, 2022',
+  //     title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 4',
+  //     subtitle: 'Read more 4',
+  //     imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-2-1-740x700.jpg',
+  //   },
+  //   {
+  //     id: 5,
+  //     date:'March 23, 2022',
+  //     title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 5',
+  //     subtitle: 'Read more 5',
+  //     imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-6-740x700.jpg',
+  //   },
+  //   {
+  //     id: 6,
+  //     date:'March 23, 2022',
+  //     title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 6',
+  //     subtitle: 'Read more 6',
+  //     imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-4-740x700.jpg',
+  //   },
+  //   {
+  //       id: 7,
+  //       date:'March 23, 2022',
+  //       title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 4',
+  //       subtitle: 'Read more 4',
+  //       imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-7-740x700.jpg',
+  //     },
+  //     {
+  //       id:8,
+  //       date:'March 23, 2022',
+  //       title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 5',
+  //       subtitle: 'Read more 5',
+  //       imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-8-740x700.jpg',
+  //     },
+  //     {
+  //       id: 9,
+  //       date:'March 23, 2022',
+  //       title: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem Product 6',
+  //       subtitle: 'Read more 6',
+  //       imageSrc: 'https://wgl-demo.net/bili/wp-content/uploads/2022/03/blog-s-3-740x700.jpg',
+  //     },
+  // ];
 
   const [index, setIndex] = useState(0);
 
@@ -211,12 +232,13 @@ export default function FiveSectionSlider() {
     <div className="product-slider">
       <Carousel className="cont" activeIndex={index} onSelect={handleSelect} interval={3000} controls={false}>
         {groupedProducts.map((group, slideIndex) => (
-          <Carousel.Item key={slideIndex}>
+          <Carousel.Item key={slideIndex} style={{cursor: "pointer"}}>
             <div className="d-flex justify-content-center">
               {group.map((product, productIndex) => (
                 <div key={product.id} className="product-card">
                   <img
-                    src={product.imageSrc}
+                   src={`http://localhost:1010/${product.imageSrc}`}
+                   
                     alt={product.title}
                     style={{
                       height: calculateImageHeight(slideIndex, productIndex), borderRadius:"2%" , display:"flex", justifyContent:"start" ,objectPosition: "center center",
@@ -226,11 +248,16 @@ export default function FiveSectionSlider() {
                  
                  <div className="image-text" style={{marginTop:"2rem"}} >
 
-                    <p style={{color:"#888888", fontSize:'18px', display:"flex", justifyContent:"start"}}>{product.date}- <a>DEVELOPMENT</a></p>
+                    <p style={{ fontSize:'18px'}} className="parent-hover">
+                      {product.date}_ <Link className="link-hover" to={product.link} >{product.subtitle}</Link>
+                    </p>
 
                     <p style={{color:"white", fontSize:'18px',display:"flex", justifyContent:"start" , textAlign:'start' }} > {product.title}</p>
 
-                    <p className="subtitle" style={{color:"#FF7425", fontSize:'18px', fontWeight:"500", display:"flex", justifyContent:"start" }}>{product.subtitle}</p>
+
+                    <Link to={product.link} style={{textDecoration:"none" }}>
+                    <p className="subtitle" style={{color:"#FF7425", fontSize:'18px', fontWeight:"500", display:"flex", justifyContent:"start"}}>Read More</p>
+                </Link>
 
                   </div>
                 </div>

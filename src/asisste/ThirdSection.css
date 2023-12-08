@@ -7,6 +7,35 @@
     /* font-family: 'Young Serif', serif; */
 }
 
+
+/* Add a class to the container of the number, line, and description */
+.section-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 200px; /* Adjust the min-height as needed */
+}
+
+/* Apply this class to the <hr> to make sure it stays in position */
+.horizontal-line {
+  width: 90%;
+  margin-top: auto;  
+  text-align: start;
+
+}
+
+/* Existing style for the description, add min-height */
+.description-paragraph {
+  margin-top: 1rem;
+  min-height: 100px; 
+  text-align: start;
+  /* Adjust the min-height to accommodate the longest text */
+}
+
+
+
+
 .thirdScircle-btn{
   width: 70px;
     height: 70px;
@@ -163,3 +192,14 @@ left: 30px;
 
 
 
+@media (max-width: 1400px) {
+  .dynamic-margin-container {
+    margin-right: 80px;
+  }
+}
+
+@media (min-width: 1401px) {
+  .dynamic-margin-container {
+    margin-right: 50px;
+  }
+}

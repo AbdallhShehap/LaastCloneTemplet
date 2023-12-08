@@ -359,10 +359,12 @@
 // };
 
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import { Link } from "react-router-dom";
 
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
-import imageunderSideMenu from '../images/2qwe.png';
+import imageunderSideMenu from "../images/2qwe.png";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { motion } from "framer-motion";
 import images from "../images/3qwe.png";
@@ -374,43 +376,155 @@ function Navbar() {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-
-
-
-
-
   const [showAlternateMenu, setShowAlternateMenu] = useState(false);
 
+  const [logo, setLogo] = useState({});
+
+  const [socialLinks, setSocialLinks] = useState([]); // State for feedback message
+  const [email, setEmail] = useState(""); // State for email input
+
+  const [feedbackMessage, setFeedbackMessage] = useState(""); // State for feedback message
+
+  const [fixedSideMenuData, setFixedSideMenuData] = useState({
+    titlesidemenu: "WHAT WE OFFER",
+    subtitle1sidemenu: "Giving Your Business Some Great Ideas",
+    subtitle2sidemenu: "",
+    textsidemenu: "MORE SERVICES",
+  });
+
+  const [contactInfo, setContactInfo] = useState([]);
+
+  const [pages, setPages] = useState([]);
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubscribeClick = async () => {
+    if (!email.trim()) {
+      setFeedbackMessage("Please enter an email address.");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setFeedbackMessage("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:1010/footer/addfootersubscribeemail",
+        { email }
+      );
+      if (response.status === 200) {
+        setFeedbackMessage("Subscribed successfully!");
+        setEmail(""); // Clear the email input field
+      } else {
+        setFeedbackMessage("Failed to subscribe.");
+      }
+    } catch (error) {
+      console.error("Error subscribing:", error);
+      setFeedbackMessage("Error subscribing.");
+    }
+  };
+
+  const fetchSocialLinksData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:1010/menuicons/socialiconmenu"
+      );
+      // Assuming the response data is an array of objects with 'title' and 'image' properties
+      console.log({ logo: response.data[0] });
+      setSocialLinks(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Fetch data from the API using Axios
+  const fetchSideMenuFixedData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:1010/sidemenu/sidemenu"
+      );
+      // Assuming the response data is an array of objects with 'title' and 'image' properties
+      console.log({ logo: response.data[0] });
+      setFixedSideMenuData(response.data[0]);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-
-  
   const closeDropdown = () => {
-    
     setIsDropdownOpen(false);
   };
 
-  
   const toggleSideMenu = () => {
     console.log("toggleSideMenu called"); // This should appear in the console
     setIsSideMenuOpen(!isSideMenuOpen);
   };
 
+  // Fetch data from the API using Axios
+  const fetchSideMenuContentData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:1010/sidemenu/sidemenucontent"
+      );
+      // Assuming the response data is an array of objects with 'title' and 'image' properties
+      console.log({ logo: response.data[0] });
+      setContactInfo(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const fetchpages = async () => {
+    try {
+      const response = await axios.get("http://localhost:1010/pages/pages");
+      console.log({ pages: response.data });
+      setPages(response.data);
+    } catch (error) {
+      console.error("Error fetching main content:", error);
+    }
+  };
+
   useEffect(() => {
+    // Fetch data from the API using Axios
+    const fetchLogoData = async () => {
+      try {
+        const response = await axios.get("http://localhost:1010/logo/logoimg");
+        // Assuming the response data is an array of objects with 'title' and 'image' properties
+        console.log({ logo: response.data[0] });
+        setLogo(response.data[0]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchLogoData();
+    fetchSocialLinksData();
+    fetchSideMenuFixedData();
+    fetchSideMenuContentData();
+    fetchpages();
+
     let lastScrollY = window.scrollY;
-  
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       const scrollThreshold = 500;
 
       if (currentScrollY > scrollThreshold) {
         setIsSideMenuOpen(false);
       }
-    
 
       if (currentScrollY < lastScrollY) {
         // Scrolling up
@@ -419,48 +533,299 @@ function Navbar() {
         // Scrolling down
         setShowAlternateMenu(false);
       }
-  
 
-       // Check if the scroll position is at the top of the page
-    if (currentScrollY === 0) {
-      setShowAlternateMenu(false);
-    }
-
-
+      // Check if the scroll position is at the top of the page
+      if (currentScrollY === 0) {
+        setShowAlternateMenu(false);
+      }
 
       lastScrollY = currentScrollY; // Update the last scroll position
     };
-  
+
     window.addEventListener("scroll", handleScroll);
-  
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
 
   return (
     <>
       {showAlternateMenu && (
-    <motion.nav className={`container-fluid navbar-alternate ${showAlternateMenu ? 'show' : ''}`}
-    initial={{ opacity: 0 }} // Initial opacity is set to 0
+        <motion.nav
+          className={`container-fluid navbar-alternate ${
+            showAlternateMenu ? "show" : ""
+          }`}
+          initial={{ opacity: 0 }} // Initial opacity is set to 0
           animate={{ opacity: 1 }} // Gradually transition to opacity 1
           transition={{ duration: 0.5 }} // Set the duration of the transition
-    >
-      {/* Alternate menu content here */}
+        >
+          {/* Alternate menu content here */}
+          <nav className="navbar container-fluid">
+            <div className="nav-brand">
+              <Link to="/">
+                <img
+                  src={`http://localhost:1010/${logo.logoImg}`}
+                  alt="Your Logo"
+                />
+              </Link>
+            </div>
+            <div className="nav-items">
+              <Link to="/">HOME</Link>
+              {/* <span className="nav-item" onMouseLeave={closeDropdown}>
+          <Link
+            to="/ourmission"
+            onMouseOver={toggleDropdown}
+            
+          >
+            PAGES
+          </Link>
+          {isDropdownOpen && (
+            <div className="dropdown-content">
+              <Link to="/page1">Page 1</Link>
+              <Link to="/page2">Page 2</Link>
+              <Link to="/ourmission">Our Mission</Link>
+            </div>
+          )}
+        </span> */}
+
+              <span className="dropdown">
+                <Link
+                  to=""
+                  onMouseOver={toggleDropdown}
+                  className=" dropdown-toggle"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  PAGES
+                </Link>
+
+                <div
+                  className="dropdown-menu newDropdown"
+                  style={{
+                    backgroundColor: "#181818",
+                    border: "1px",
+                    boxShadow: "1px",
+                    marginLeft: "130px",
+                  }}
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  {pages.map((item, index) => {
+                    const fullPath = `/${item.path.trim()}`;
+                    console.log(fullPath); // Check the output in the console
+                    return (
+                      <Link
+                        className="dropdown-item newDropdownItem"
+                        key={index}
+                        to={fullPath}
+                        style={{ marginLeft: "0px" }}
+                      >
+                        {item.namePage}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </span>
+
+              {pages.slice(0, 5).map((item, index) => (
+        <Link key={index} to={`/${item.path.trim()}`}>
+          {item.namePage}
+        </Link>
+      ))}
+            </div>
+
+            <div className="nav-cart">
+              {/* The menu icon from react-icons to toggle the side menu */}
+              <HiMenuAlt4
+                onClick={toggleSideMenu}
+                style={{ fontSize: "30px" }}
+              />
+            </div>
+
+            {/* Sidebar menu */}
+            {isSideMenuOpen && (
+              <motion.div
+                className={`side-menu ${isSideMenuOpen ? "show" : ""}`}
+                initial={{ x: -300 }}
+                animate={{ x: 0 }}
+                transition={{ duration: 0.85, ease: "easeOut" }}
+              >
+                <HiX onClick={toggleSideMenu} />
+                <div className="container-fluid">
+                  <div className="row" style={{ marginTop: "40px" }}>
+                    <div className="col-1"></div>
+
+                    <div
+                      className="col-10"
+                      style={{ display: "flex", justifyContent: "start" }}
+                    >
+                      <Link to="/">
+                        <img
+                          src="https://wgl-demo.net/bili/wp-content/uploads/2022/03/logo-1.png"
+                          alt="Your Logo"
+                          height="50px"
+                          width="50px"
+                          style={{ padding: "0", margin: "0" }}
+                        />
+                      </Link>
+                    </div>
+
+                    <div className="col-1"></div>
+                  </div>
+
+                  <div className="row" style={{ marginTop: "30px" }}>
+                    <div className="col-1"></div>
+                    <div className="col-10">
+                      <p style={{ textAlign: "start", fontSize: "25px" }}>
+                        {fixedSideMenuData.titlesidemenu}
+                      </p>
+                    </div>
+                    <div className="col-1"></div>
+                  </div>
+
+                  <div className="row" style={{ marginTop: "10px" }}>
+                    <div className="col-1"></div>
+                    <div className="col-10">
+                      <p
+                        style={{
+                          textAlign: "start",
+                          fontSize: "16px",
+                          color: "#aaa9a9",
+                          fontWeight: "700",
+                        }}
+                      >
+                        {fixedSideMenuData.subtitle1sidemenu}
+                      </p>
+
+                      <ul>
+                        {contactInfo.map((item, index) => (
+                          <li key={index} className="contact-item">
+                            {item.content}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="col-1"></div>
+                  </div>
+
+                  <div className="row" style={{ marginTop: "10px" }}>
+                    <div className="col-1"></div>
+                    <div className="col-10">
+                      <p
+                        style={{
+                          textAlign: "start",
+                          fontSize: "16px",
+                          color: "#aaa9a9",
+                          fontWeight: "700",
+                        }}
+                      >
+                        {fixedSideMenuData.subtitle2sidemenu}
+                      </p>
+
+                      <div class="col-auto">
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="inlineFormInputGroup"
+                            placeholder="Get news & updates"
+                            style={{
+                              backgroundColor: "black",
+                              border: "none",
+                              color: "white",
+                            }}
+                            value={email}
+                            onChange={handleEmailChange}
+                          />
+                          <button
+                            style={{
+                              backgroundColor: "black",
+                              border: "none",
+                              color: "white",
+                              fontSize: "23px",
+                            }}
+                            class="input-group-text"
+                            onClick={handleSubscribeClick}
+                          >
+                            @
+                          </button>
+                        </div>
+                        {feedbackMessage && (
+                          <p style={{ color: "white" }}>{feedbackMessage}</p>
+                        )}
+                      </div>
+
+                      <p
+                        style={{
+                          textAlign: "start",
+                          fontSize: "13px",
+                          color: "#aaa9a9",
+                        }}
+                      >
+                        {fixedSideMenuData.textsidemenu}
+                      </p>
+                    </div>
+                    <div className="col-1"></div>
+                  </div>
+
+                  <div
+                    className="row social-links"
+                    style={{ marginTop: "10px" }}
+                  >
+                    <div className="col-1"></div>
+                    <div className="col-5 d-flex justify-content-between align-items-center">
+                      {socialLinks.map((link, index) => (
+                        <a
+                          key={index}
+                          href={link.link}
+                          className="social-icon"
+                          style={{
+                            color: "white",
+                            marginLeft: index > 0 ? "1rem" : "0",
+                          }}
+                        >
+                          <img
+                            src={`http://localhost:1010/${link.icon}`}
+                            style={{ height: "25px" }}
+                          />
+                        </a>
+                      ))}
+                    </div>
+                    <div className="col-5"></div>
+                    <div className="col-1"></div>
+                  </div>
+
+                  <div
+                    className="row imageInLastSideMenu"
+                    style={{ marginTop: "30px", width: "100%" }}
+                  >
+                    <img
+                      src={imageunderSideMenu}
+                      className="imageunderSideMenu"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </nav>
+        </motion.nav>
+      )}
+
       <nav className="navbar container-fluid">
-      <div className="nav-brand">
-      <Link to="/">
-
-        <img
-          src="https://wgl-demo.net/bili/wp-content/uploads/2022/03/logo-1.png"
-          alt="Your Logo"
-        />
-      </Link>
-      </div>
-      <div className="nav-items">
-  <Link to="/">HOME</Link>
-  {/* <span className="nav-item" onMouseLeave={closeDropdown}>
+        <div className="nav-brand">
+          <Link to="/">
+            <img
+              src={`http://localhost:1010/${logo.logoImg}`}
+              alt="Your Logo"
+            />
+          </Link>
+        </div>
+        <div className="nav-items">
+          <Link to="/">HOME</Link>
+          {/* <span className="nav-item" onMouseLeave={closeDropdown}>
           <Link
             to="/ourmission"
             onMouseOver={toggleDropdown}
@@ -477,459 +842,216 @@ function Navbar() {
           )}
         </span> */}
 
+          <span className="dropdown">
+            <Link
+              onMouseOver={toggleDropdown}
+              className=" dropdown-toggle"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              PAGES
+            </Link>
 
-  <span className="dropdown" >
-          <Link
-            to=""
-            onMouseOver={toggleDropdown}
-            className=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            <div
+              className="dropdown-menu newDropdown"
+              style={{
+                backgroundColor: "#181818",
+                border: "1px",
+                boxShadow: "1px",
+                marginLeft: "130px",
+              }}
+              aria-labelledby="dropdownMenuButton"
+            >
+             {pages.map((item, index) => {
+                    const fullPath = `/${item.path.trim()}`;
+                    console.log(fullPath); // Check the output in the console
+                    return (
+                      <Link
+                        className="dropdown-item newDropdownItem"
+                        key={index}
+                        to={fullPath}
+                        style={{ marginLeft: "0px" }}
+                      >
+                        {item.namePage}
+                      </Link>
+                    );
+                  })}
+            </div>
+          </span>
+
+          {pages.slice(0, 5).map((item, index) => (
+        <Link key={index} to={`/${item.path.trim()}`}>
+          {item.namePage}
+        </Link>
+      ))}
+        </div>
+
+        <div className="nav-cart">
+          {/* The menu icon from react-icons to toggle the side menu */}
+          <HiMenuAlt4 onClick={toggleSideMenu} style={{ fontSize: "30px" }} />
+        </div>
+
+        {/* Sidebar menu */}
+        {isSideMenuOpen && (
+          <motion.div
+            className={`side-menu ${isSideMenuOpen ? "show" : ""}`}
+            initial={{ x: -300 }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.85, ease: "easeOut" }}
           >
-            PAGES
-          </Link>
-        
-             <div className="dropdown-menu newDropdown" style={{backgroundColor:"#181818", border:"1px", boxShadow:"1px", marginLeft:"130px"}} aria-labelledby="dropdownMenuButton">
-             {/* {menuItems.map((item, index) => (
-               <Link className="dropdown-item" key={index} to={item.path}>{item.label}</Link>
-             ))} */}
-                <Link  className="dropdown-item newDropdownItem" to="/blog" style={{marginLeft:"0px"}}>BLOG</Link>
-              <Link  className="dropdown-item newDropdownItem" to="/ourmission"style={{marginLeft:"0px"}}>OUR MISSION</Link>
-              <Link  className="dropdown-item newDropdownItem" to="/portfolio"style={{marginLeft:"0px"}}>PORTFOLIO</Link>
-              <Link  className="dropdown-item newDropdownItem" to="/contactus"style={{marginLeft:"0px"}}>CONTACT US</Link>
-           </div>
-    
-        </span>
+            <HiX onClick={toggleSideMenu} />
+            <div className="container-fluid">
+              <div className="row" style={{ marginTop: "40px" }}>
+                <div className="col-1"></div>
 
-        
-  <Link to="/blog">BLOG</Link>
-  <Link to="/portfolio">PORTFOLIO</Link>
-  <Link to="/ourmission">OUR MISSION</Link>
-  <Link to="/contactus">CONTACTS</Link>
-
- 
-</div>
-
-      <div className="nav-cart">
-        {/* The menu icon from react-icons to toggle the side menu */}
-        <HiMenuAlt4 onClick={toggleSideMenu} style={{ fontSize: '30px' }} />
-      </div>
-
-      {/* Sidebar menu */}
-      {isSideMenuOpen && (
-        <motion.div
-          className={`side-menu ${isSideMenuOpen ? "show" : ""}`}
-          initial={{ x: -300 }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.85, ease: "easeOut" }}
-        >
-          <HiX onClick={toggleSideMenu} />
-          <div className="container-fluid">
-            <div className="row" style={{ marginTop: "40px" }}>
-              <div className="col-1"></div>
-
-              <div className="col-10"
-                style={{ display: "flex", justifyContent: "start" }}
-              >
-
-<Link to="/">
-
-                <img
-                  src="https://wgl-demo.net/bili/wp-content/uploads/2022/03/logo-1.png"
-                  alt="Your Logo"
-                  height="50px"
-                  width="50px"
-                  style={{ padding: "0", margin: "0" }}
-                />
-</Link>
-              </div>
-
-              <div className="col-1"></div>
-            </div>
-
-            <div className="row" style={{ marginTop: "30px" }}>
-              <div className="col-1"></div>
-              <div className="col-10">
-                <p style={{ textAlign: "start", fontSize: "25px" }}>
-                  Unique Digital Ideas for Successful Business
-                </p>
-              </div>
-              <div className="col-1"></div>
-            </div>
-
-            <div className="row" style={{ marginTop: "10px" }}>
-              <div className="col-1"></div>
-              <div className="col-10">
-                <p
-                  style={{
-                    textAlign: "start",
-                    fontSize: "16px",
-                    color: "#aaa9a9",
-                    fontWeight: "700",
-                  }}
+                <div
+                  className="col-10"
+                  style={{ display: "flex", justifyContent: "start" }}
                 >
-                  CONTACT US
-                </p>
-
-                <ul>
-                  <li className="contact-item">
-                    27 Division St, New York, NY 10002
-                  </li>
-                  <li className="contact-item">+1 800 123 456 78</li>
-                  <li className="contact-item">bili@mail.com</li>
-                </ul>
-              </div>
-              <div className="col-1"></div>
-            </div>
-
-            <div className="row" style={{ marginTop: "10px" }}>
-              <div className="col-1"></div>
-              <div className="col-10">
-                <p
-                  style={{
-                    textAlign: "start",
-                    fontSize: "16px",
-                    color: "#aaa9a9",
-                    fontWeight: "700",
-                  }}
-                >
-                  SUBSCRIBE
-                </p>
-
-                <div class="col-auto">
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend"></div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="inlineFormInputGroup"
-                      placeholder="Get news & updates"
-                      style={{
-                        backgroundColor: "black",
-                        border: "none",
-                        color: "white",
-                      }}
-                    />
-                    <button
-                      style={{
-                        backgroundColor: "black",
-                        border: "none",
-                        color: "white",
-                        fontSize: "23px",
-                      }}
-                      class="input-group-text"
-                    >
-                      @
-                    </button>
-                  </div>
+                  <img
+                    src={`http://localhost:1010/${logo.logoImg}`}
+                    alt="Your Logo"
+                    height="50px"
+                    width="50px"
+                    style={{ padding: "0", margin: "0" }}
+                  />
                 </div>
 
-                <p
-                  style={{
-                    textAlign: "start",
-                    fontSize: "13px",
-                    color: "#aaa9a9",
-                  }}
-                >
-                  Our expertise, as well as our passion for web design, sets us
-                  apart from other agencies.
-                </p>
-              </div>
-              <div className="col-1"></div>
-            </div>
-
-            <div className="row social-links" style={{ marginTop: "10px" }}>
-              <div className="col-1"></div>
-              <div className="col-5 d-flex justify-content-between align-items-center">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaFacebook size={20} color="white" className="social-icon" />
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaTwitter size={20} color="white" className="social-icon" />
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaInstagram
-                    size={20}
-                    color="white"
-                    className="social-icon"
-                  />
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaLinkedin size={20} color="white" className="social-icon" />
-                </a>
-              </div>
-              <div className="col-5"></div>
-              <div className="col-1"></div>
-            </div>
-
-
-            <div className="row imageInLastSideMenu" style={{ marginTop: "30px", width:"100%" }}>
-              
-
-              <img src={imageunderSideMenu} className="imageunderSideMenu" />
-            
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-
-    </nav>
-    </motion.nav>
-  )}
-
-
-    <nav className="navbar container-fluid">
-      <div className="nav-brand">
-
-      <Link to="/">
-
-        <img
-          src="https://wgl-demo.net/bili/wp-content/uploads/2022/03/logo-1.png"
-          alt="Your Logo"
-        />
-</Link>
-      </div>
-      <div className="nav-items">
-  <Link to="/">HOME</Link>
-  {/* <span className="nav-item" onMouseLeave={closeDropdown}>
-          <Link
-            to="/ourmission"
-            onMouseOver={toggleDropdown}
-            
-          >
-            PAGES
-          </Link>
-          {isDropdownOpen && (
-            <div className="dropdown-content">
-              <Link to="/page1">Page 1</Link>
-              <Link to="/page2">Page 2</Link>
-              <Link to="/ourmission">Our Mission</Link>
-            </div>
-          )}
-        </span> */}
-
-<span className="dropdown" >
-          <Link
-           
-            onMouseOver={toggleDropdown}
-            className=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-          >
-            PAGES
-          </Link>
-        
-             <div className="dropdown-menu newDropdown" style={{backgroundColor:"#181818", border:"1px", boxShadow:"1px", marginLeft:"130px"}} aria-labelledby="dropdownMenuButton">
-             {/* {menuItems.map((item, index) => (
-               <Link className="dropdown-item" key={index} to={item.path}>{item.label}</Link>
-             ))} */}
-              <Link  className="dropdown-item newDropdownItem" to="/blog" style={{marginLeft:"0px"}}>BLOG</Link>
-              <Link  className="dropdown-item newDropdownItem" to="/ourmission"style={{marginLeft:"0px"}}>OUR MISSION</Link>
-              <Link  className="dropdown-item newDropdownItem" to="/portfolio"style={{marginLeft:"0px"}}>PORTFOLIO</Link>
-              <Link  className="dropdown-item newDropdownItem" to="/contactus"style={{marginLeft:"0px"}}>CONTACT US</Link>
-           </div>
-    
-        </span>
-
-        
-  <Link to="/blog">BLOG</Link>
-  <Link to="/portfolio">PORTFOLIO</Link>
-  <Link to="/ourmission">OUR MISSION</Link>
-  <Link to="/contactus">CONTACTS</Link>
-
- 
-</div>
-
-      <div className="nav-cart">
-        {/* The menu icon from react-icons to toggle the side menu */}
-        <HiMenuAlt4 onClick={toggleSideMenu} style={{ fontSize: '30px' }} />
-      </div>
-
-      {/* Sidebar menu */}
-      {isSideMenuOpen && (
-        <motion.div
-          className={`side-menu ${isSideMenuOpen ? "show" : ""}`}
-          initial={{ x: -300 }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.85, ease: "easeOut" }}
-        >
-          <HiX onClick={toggleSideMenu} />
-          <div className="container-fluid">
-            <div className="row" style={{ marginTop: "40px" }}>
-              <div className="col-1"></div>
-
-              <div className="col-10"
-                style={{ display: "flex", justifyContent: "start" }}
-              >
-                <img
-                  src="https://wgl-demo.net/bili/wp-content/uploads/2022/03/logo-1.png"
-                  alt="Your Logo"
-                  height="50px"
-                  width="50px"
-                  style={{ padding: "0", margin: "0" }}
-                />
+                <div className="col-1"></div>
               </div>
 
-              <div className="col-1"></div>
-            </div>
-
-            <div className="row" style={{ marginTop: "30px" }}>
-              <div className="col-1"></div>
-              <div className="col-10">
-                <p style={{ textAlign: "start", fontSize: "25px" }}>
-                  Unique Digital Ideas for Successful Business
-                </p>
-              </div>
-              <div className="col-1"></div>
-            </div>
-
-            <div className="row" style={{ marginTop: "10px" }}>
-              <div className="col-1"></div>
-              <div className="col-10">
-                <p
-                  style={{
-                    textAlign: "start",
-                    fontSize: "16px",
-                    color: "#aaa9a9",
-                    fontWeight: "700",
-                  }}
-                >
-                  CONTACT US
-                </p>
-
-                <ul>
-                  <li className="contact-item">
-                    27 Division St, New York, NY 10002
-                  </li>
-                  <li className="contact-item">+1 800 123 456 78</li>
-                  <li className="contact-item">bili@mail.com</li>
-                </ul>
-              </div>
-              <div className="col-1"></div>
-            </div>
-
-            <div className="row" style={{ marginTop: "10px" }}>
-              <div className="col-1"></div>
-              <div className="col-10">
-                <p
-                  style={{
-                    textAlign: "start",
-                    fontSize: "16px",
-                    color: "#aaa9a9",
-                    fontWeight: "700",
-                  }}
-                >
-                  SUBSCRIBE
-                </p>
-
-                <div class="col-auto">
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend"></div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="inlineFormInputGroup"
-                      placeholder="Get news & updates"
-                      style={{
-                        backgroundColor: "black",
-                        border: "none",
-                        color: "white",
-                      }}
-                    />
-                    <button
-                      style={{
-                        backgroundColor: "black",
-                        border: "none",
-                        color: "white",
-                        fontSize: "23px",
-                      }}
-                      class="input-group-text"
-                    >
-                      @
-                    </button>
-                  </div>
+              <div className="row" style={{ marginTop: "30px" }}>
+                <div className="col-1"></div>
+                <div className="col-10">
+                  <p style={{ textAlign: "start", fontSize: "25px" }}>
+                    {fixedSideMenuData.titlesidemenu}
+                  </p>
                 </div>
-
-                <p
-                  style={{
-                    textAlign: "start",
-                    fontSize: "13px",
-                    color: "#aaa9a9",
-                  }}
-                >
-                  Our expertise, as well as our passion for web design, sets us
-                  apart from other agencies.
-                </p>
+                <div className="col-1"></div>
               </div>
-              <div className="col-1"></div>
-            </div>
 
-            <div className="row social-links" style={{ marginTop: "10px" }}>
-              <div className="col-1"></div>
-              <div className="col-5 d-flex justify-content-between align-items-center">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaFacebook size={20} color="white" className="social-icon" />
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaTwitter size={20} color="white" className="social-icon" />
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaInstagram
-                    size={20}
-                    color="white"
-                    className="social-icon"
-                  />
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaLinkedin size={20} color="white" className="social-icon" />
-                </a>
+              <div className="row" style={{ marginTop: "10px" }}>
+                <div className="col-1"></div>
+                <div className="col-10">
+                  <p
+                    style={{
+                      textAlign: "start",
+                      fontSize: "16px",
+                      color: "#aaa9a9",
+                      fontWeight: "700",
+                    }}
+                  >
+                    {fixedSideMenuData.subtitle1sidemenu}
+                  </p>
+
+                  <ul>
+                    {contactInfo.map((item, index) => (
+                      <li key={index} className="contact-item">
+                        {item.content}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="col-1"></div>
               </div>
-              <div className="col-5"></div>
-              <div className="col-1"></div>
+
+              <div className="row" style={{ marginTop: "10px" }}>
+                <div className="col-1"></div>
+                <div className="col-10">
+                  <p
+                    style={{
+                      textAlign: "start",
+                      fontSize: "16px",
+                      color: "#aaa9a9",
+                      fontWeight: "700",
+                    }}
+                  >
+                    {fixedSideMenuData.subtitle2sidemenu}
+                  </p>
+
+                  <div class="col-auto">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend"></div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inlineFormInputGroup"
+                        placeholder="Get news & updates"
+                        style={{
+                          backgroundColor: "black",
+                          border: "none",
+                          color: "white",
+                        }}
+                        value={email}
+                        onChange={handleEmailChange}
+                      />
+                      <button
+                        style={{
+                          backgroundColor: "black",
+                          border: "none",
+                          color: "white",
+                          fontSize: "23px",
+                        }}
+                        class="input-group-text"
+                        onClick={handleSubscribeClick}
+                      >
+                        @
+                      </button>
+                    </div>
+                    {feedbackMessage && (
+                      <p style={{ color: "white" }}>{feedbackMessage}</p>
+                    )}
+                  </div>
+
+                  <p
+                    style={{
+                      textAlign: "start",
+                      fontSize: "13px",
+                      color: "#aaa9a9",
+                    }}
+                  >
+                    {fixedSideMenuData.textsidemenu}
+                  </p>
+                </div>
+                <div className="col-1"></div>
+              </div>
+
+              <div className="row social-links" style={{ marginTop: "10px" }}>
+                <div className="col-1"></div>
+                <div className="col-5 d-flex justify-content-between align-items-center">
+                  {socialLinks.map((link, index) => (
+                    <a
+                      key={index}
+                      href={link.link}
+                      className="social-icon"
+                      style={{
+                        color: "white",
+                        marginLeft: index > 0 ? "1rem" : "0",
+                      }}
+                    >
+                      <img
+                        src={`http://localhost:1010/${link.icon}`}
+                        style={{ height: "25px" }}
+                      />
+                    </a>
+                  ))}
+                </div>
+                <div className="col-5"></div>
+                <div className="col-1"></div>
+              </div>
+
+              <div
+                className="row imageInLastSideMenu"
+                style={{ marginTop: "30px", width: "100%" }}
+              >
+                <img src={imageunderSideMenu} className="imageunderSideMenu" />
+              </div>
             </div>
-
-
-            <div className="row imageInLastSideMenu" style={{ marginTop: "30px", width:"100%" }}>
-              
-
-              <img src={imageunderSideMenu} className="imageunderSideMenu" />
-            
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-
-    </nav>
+          </motion.div>
+        )}
+      </nav>
     </>
   );
 }

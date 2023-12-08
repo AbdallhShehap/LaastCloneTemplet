@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -6,6 +8,42 @@ import "../asisste/FirstSection.css";
 
 export default function TwoColumnLayout() {
   const [activeSection, setActiveSection] = useState(null);
+  const [ourBenefitsFixed, setOurBenefitsFixed] = useState({});
+
+
+  const [ourBenfits, setOurBenfits] = useState([]);
+
+  useEffect(() => {
+
+    const fetchFixdContent = async () => {
+      try {
+        const response = await axios.get('http://localhost:1010/ourbenfits/imgourbenefits');
+        setOurBenefitsFixed(response.data[0]);
+      } catch (error) {
+        console.error('Error fetching main content:', error);
+      }
+    };
+
+
+
+    // Fetch data from the API using Axios
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:1010/ourbenfits/ourbenfitscontent');
+        // Assuming the response data is an array of objects with 'title' and 'image' properties
+        console.log(response.data[0])
+        setOurBenfits(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchFixdContent();
+    fetchData();
+  }, []);
+
+
+
 
   const toggleReadMore = (section) => {
     if (activeSection === section) {
@@ -27,26 +65,26 @@ export default function TwoColumnLayout() {
   };
   
 
-  const sections = [
-    {
-      id: 1,
-      title: "High Standarts",
-      content:
-        "Through our years of experience, we've also learned that while each channel has its own set of advantages, they all work best when strategically paired with other channels.",
-    },
-    {
-      id: 2,
-      title: "Focus on People",
-      content:
-        "Through our years of experience, we've also learned that while each channel has its own set of advantages, they all work best when strategically paired with other channels.",
-    },
-    {
-      id: 3,
-      title: "Different Thinking",
-      content:
-        "Through our years of experience, we've also learned that while each channel has its own set of advantages, they all work best when strategically paired with other channels.",
-    },
-  ];
+  // const sections = [
+  //   {
+  //     id: 1,
+  //     title: "High Standarts",
+  //     content:
+  //       "Through our years of experience, we've also learned that while each channel has its own set of advantages, they all work best when strategically paired with other channels.",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Focus on People",
+  //     content:
+  //       "Through our years of experience, we've also learned that while each channel has its own set of advantages, they all work best when strategically paired with other channels.",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Different Thinking",
+  //     content:
+  //       "Through our years of experience, we've also learned that while each channel has its own set of advantages, they all work best when strategically paired with other channels.",
+  //   },
+  // ];
 
   return (
     <div className="container-fluid Part2FirstSection">
@@ -64,7 +102,7 @@ export default function TwoColumnLayout() {
               fontFamily:"sans-serif"
             }}
           >
-            OUR BENEFITS
+           {ourBenefitsFixed.sectionTitile}
           </p>
           <p
             style={{
@@ -79,9 +117,9 @@ export default function TwoColumnLayout() {
 
             }}
           >
-            Unlock Revenue Growth for Your Business
+             {ourBenefitsFixed.sectionSubtitile}
           </p>
-          {sections.map((section) => (
+          {ourBenfits.map((section) => (
       <div key={section.id}>
         <p
           className={`Read ${activeSection === section.id ? 'active' : ''}`}
@@ -114,7 +152,8 @@ export default function TwoColumnLayout() {
         <div className="col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-6 right-side">
           <img
             className="right-side-img"
-            src="https://wgl-demo.net/bili/wp-content/uploads/2022/03/home1_arrow_bg.png"
+            src={`http://localhost:1010/${ourBenefitsFixed.imgSection}`}
+
             alt="Your Image"
 
           />

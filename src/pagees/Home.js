@@ -13,7 +13,7 @@ function Home() {
 
       
       {/* First Section */}
-      <div >
+      <div style={{cursor:'default'}}>
       <FirstSection/>
 
       </div>
@@ -21,11 +21,11 @@ function Home() {
       {/* Secound Section */}
       <div>
 
-      <SecondSection style={{}}/>
+      <SecondSection style={{cursor:'default'}}/>
       </div>
 
 
-      <div >
+      <div style={{cursor:'default'}} >
         <ThirdSection/>
       </div>
 
@@ -39,7 +39,7 @@ function Home() {
       </div>
         
     
-      <div style={{width:'100%'}}>
+      <div style={{width:'100%',cursor:'default'}}>
         <Footer/>
       </div>
     </div>

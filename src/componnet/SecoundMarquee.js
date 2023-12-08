@@ -66,7 +66,7 @@ const CustomMarquee = () => {
     // Fetch data from the API using Axios
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:1010/firstmarquee/firstmarquee');
+        const response = await axios.get('http://localhost:1010/secoundmarquee/secoundmarquee');
         // Assuming the response data is an array of objects with 'title' and 'image' properties
         console.log(response.data[0])
         setMarqueeItems(response.data);
@@ -90,9 +90,9 @@ const CustomMarquee = () => {
       {marqueeItems.map((item) => (
         <React.Fragment key={item['id-first-marquee']}>
           <p className="textMarqueeFirst" style={{ color: 'white' }}>
-          {item['title-first-marquee']}
+          {item['title-secound-marquee']}
               <img
-               src={`http://localhost:1010/${item.imageFirstMarqueePath}`}
+               src={`http://localhost:1010/${item.imageSecoundMarqueePath}`}
             
                 height="70px"
                 width="70px"

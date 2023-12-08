@@ -88,8 +88,8 @@
 
 
 
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../asisste/SecondSection.css';
 import image1 from '../images/1qwe.png';
 import image2 from '../images/2qwe.png';
@@ -98,7 +98,29 @@ import { Link } from "react-router-dom";
 
 const SecondSection = () => {
 
-  // Assuming you have a function to handle the click event
+
+  
+  
+  const [caseSStady, setCaseSStady] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from the API using Axios
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:1010/categories/categories');
+        // Assuming the response data is an array of objects with 'title' and 'image' properties
+        console.log(response.data[0])
+        setCaseSStady(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
   const handleClick = (category) => {
     // Save the selected category in localStorage
     sessionStorage.setItem('selectedCategory', category);
@@ -127,13 +149,15 @@ const dataArray = [
     link:'portfolio'
   },
 ];
+
+
   return (
     <div className='SecondSection'>
-      {dataArray.map((item, index) => (
+      {caseSStady.map((item, index) => (
         
         <div className='image-container' key={index}>
-          <Link className='Link' to={item.link} onClick={() => handleClick(item.category)}>
-          <img className={`img img${index + 1}`} src={item.image} width="100%" />
+          <Link className='Link' to="portfolio" onClick={() => handleClick(item.category)}>
+          <img className={`img img${index + 1}`}     src={`http://localhost:1010/${item.imageCategoryPath}`} width="100%" />
         </Link>
 
           <div className='text-overlay container-fluid g-0'>
@@ -141,9 +165,9 @@ const dataArray = [
               <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-2"></div>
              
               <div className='col-sm-11 col-md-11 col-lg-11 col-xl-11 col-xxl-7 HIGH-TEXT'>
-              <Link className='Link' to={item.link} onClick={() => handleClick(item.category)}>
-                <div className='top-text'>{item.topText}</div>
-                <div className='bottom-text'>{item.bottomText}</div>
+              <Link className='Link' to="portfolio" onClick={() => handleClick(item.category)}>
+                <div className='top-text'>{item.toptext}</div>
+                <div className='bottom-text'>{item.bottomtext}</div>
 
               </Link>
               </div>
