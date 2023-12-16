@@ -90,13 +90,19 @@ const CustomMarquee = () => {
       {marqueeItems.map((item) => (
         <React.Fragment key={item['id-first-marquee']}>
           <p className="textMarqueeFirst" style={{ color: 'white' }}>
-          {item['title-first-marquee']}
+          {item['titleFirstMarquee']}
+
+          {item.imageFirstMarqueePath &&
+          (
+
+
               <img
                src={`http://localhost:1010/${item.imageFirstMarqueePath}`}
             
                 height="70px"
                 width="70px"
               />
+          )}
           </p>
       
          

@@ -12,7 +12,21 @@ import axios from 'axios';
 function ResponsiveAutoExample() {
   const [socialMediaLinks, setOurBenefitsFixed] = useState([]);
   const [mainSectionTextImg, setMainSectionTextImg] = useState({
+});
+  const [mainSectionIcon, setMainSectionIcon] = useState({
   });
+
+
+
+  // Function to add protocol if missing
+const addProtocol = (link) => {
+  // Check if the link starts with a protocol
+  if (!link.startsWith('http://') && !link.startsWith('https://')) {
+    // If not, prepend 'http://' (you can adjust this logic based on your requirements)
+    return `http://${link}`;
+  }
+  return link;
+};
 
 
   const fetchFixdContent = async () => {
@@ -26,8 +40,17 @@ function ResponsiveAutoExample() {
 
   const fetchMainSectionTextImg = async () => {
     try {
-      const response = await axios.get('http://localhost:1010/mainsection/textimgmainsection/1');
+      const response = await axios.get('http://localhost:1010/mainsection/textmainsection/1');
       setMainSectionTextImg(response.data);
+    } catch (error) {
+      console.error('Error fetching main content:', error);
+    }
+  };
+
+  const fetchMainSectionIcon = async () => {
+    try {
+      const response = await axios.get('http://localhost:1010/mainsection/iconmainsection');
+      setMainSectionIcon(response.data[0]);
     } catch (error) {
       console.error('Error fetching main content:', error);
     }
@@ -44,6 +67,7 @@ function ResponsiveAutoExample() {
 
     fetchFixdContent();
     fetchMainSectionTextImg();
+    fetchMainSectionIcon();
 
   }, []);
 
@@ -59,13 +83,14 @@ function ResponsiveAutoExample() {
         <div className="row firstText" style={{ marginTop: "4rem" }}>
           <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1  col-xxl-2 ">
           <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-2">
-      {socialMediaLinks.map(({ name, link }, index) => (
-        <div key={index}>
-          <Link  className="vertical-words" to={link} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
-            {name}
-          </Link>
-        </div>
-      ))}
+          {socialMediaLinks.map(({ name, link }, index) => (
+  <div key={index}>
+    <a className="vertical-words" href={addProtocol(link)} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+      {name}
+    </a>
+  </div>
+))}
+     
     </div>
           </div>
 
@@ -109,11 +134,11 @@ function ResponsiveAutoExample() {
                 >
                   <div>
 
-                  {mainSectionTextImg.icon  && (
+                  {mainSectionIcon.icon  && (
 
                     <img
                       className="imgicon"
-                      src={`http://localhost:1010/${mainSectionTextImg.icon}`}
+                      src={`http://localhost:1010/${mainSectionIcon.icon}`}
                       style={{}}
                     />
                     
@@ -146,7 +171,7 @@ function ResponsiveAutoExample() {
 
 
 
-                {mainSectionTextImg.icon && (
+                {mainSectionIcon.icon && (
 
                 <div className="row"
                   style={{
@@ -167,7 +192,7 @@ function ResponsiveAutoExample() {
 
                 )}
 
-                {!mainSectionTextImg.icon && (
+                {!mainSectionIcon.icon && (
 
                 <div className="row"
                   style={{

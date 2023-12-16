@@ -396,6 +396,8 @@ function Navbar() {
 
   const [pages, setPages] = useState([]);
 
+  const [imagBlow, setImagBlow] = useState({});
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -509,11 +511,25 @@ function Navbar() {
       }
     };
 
+    const fetchImagBlow = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:1010/sidemenu/imgsidemenu"
+        );
+        // Assuming the response data is an array of objects with 'title' and 'image' properties
+        console.log({ logo: response.data[0] });
+        setImagBlow(response.data[0]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
     fetchLogoData();
     fetchSocialLinksData();
     fetchSideMenuFixedData();
     fetchSideMenuContentData();
     fetchpages();
+    fetchImagBlow();
 
     let lastScrollY = window.scrollY;
 
@@ -548,6 +564,20 @@ function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+
+  // Function to add protocol if missing
+const addProtocol = (url) => {
+  // Check if the link starts with a protocol
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    // If not, prepend 'http://' (you can adjust this logic based on your requirements)
+    return `http://${url}`;
+  }
+  return url;
+};
+
+
+
 
   return (
     <>
@@ -613,27 +643,55 @@ function Navbar() {
                   aria-labelledby="dropdownMenuButton"
                 >
                   {pages.map((item, index) => {
-                    const fullPath = `/${item.path.trim()}`;
-                    console.log(fullPath); // Check the output in the console
-                    return (
-                      <Link
-                        className="dropdown-item newDropdownItem"
-                        key={index}
-                        to={fullPath}
-                        style={{ marginLeft: "0px" }}
-                      >
-                        {item.namePage}
-                      </Link>
-                    );
-                  })}
+  const isExternalLink = item.path.startsWith("http") || item.path.startsWith("https");
+  const fullPath = isExternalLink ? item.path.trim() : `/${item.path.trim()}`;
+
+  return isExternalLink ? (
+    <a
+      className="dropdown-item newDropdownItem"
+      key={index}
+      href={fullPath}
+      target="_blank" // Opens in a new tab
+      rel="noopener noreferrer" // For security reasons
+      style={{ marginLeft: "0px" }}
+    >
+      {item.namePage}
+    </a>
+  ) : (
+    <Link
+      className="dropdown-item newDropdownItem"
+      key={index}
+      to={fullPath}
+      style={{ marginLeft: "0px" }}
+    >
+      {item.namePage}
+    </Link>
+  );
+})}
+
                 </div>
               </span>
 
-              {pages.slice(0, 5).map((item, index) => (
-        <Link key={index} to={`/${item.path.trim()}`}>
-          {item.namePage}
-        </Link>
-      ))}
+              {pages.slice(0, 5).map((item, index) => {
+  const isExternalLink = item.path.startsWith("http") || item.path.startsWith("https");
+  const fullPath = isExternalLink ? item.path.trim() : `/${item.path.trim()}`;
+
+  return isExternalLink ? (
+    <a
+      key={index}
+      href={fullPath}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {item.namePage}
+    </a>
+  ) : (
+    <Link key={index} to={fullPath}>
+      {item.namePage}
+    </Link>
+  );
+})}
+
             </div>
 
             <div className="nav-cart">
@@ -780,7 +838,7 @@ function Navbar() {
                       {socialLinks.map((link, index) => (
                         <a
                           key={index}
-                          href={link.link}
+                          href={addProtocol(link.link)}
                           className="social-icon"
                           style={{
                             color: "white",
@@ -803,7 +861,7 @@ function Navbar() {
                     style={{ marginTop: "30px", width: "100%" }}
                   >
                     <img
-                      src={imageunderSideMenu}
+                      src={`http://localhost:1010/${imagBlow.imgsidemenubelow}`}
                       className="imageunderSideMenu"
                     />
                   </div>
@@ -864,28 +922,56 @@ function Navbar() {
               }}
               aria-labelledby="dropdownMenuButton"
             >
-             {pages.map((item, index) => {
-                    const fullPath = `/${item.path.trim()}`;
-                    console.log(fullPath); // Check the output in the console
-                    return (
-                      <Link
-                        className="dropdown-item newDropdownItem"
-                        key={index}
-                        to={fullPath}
-                        style={{ marginLeft: "0px" }}
-                      >
-                        {item.namePage}
-                      </Link>
-                    );
-                  })}
+          {pages.map((item, index) => {
+  const isExternalLink = item.path.startsWith("http") || item.path.startsWith("https");
+  const fullPath = isExternalLink ? item.path.trim() : `/${item.path.trim()}`;
+
+  return isExternalLink ? (
+    <a
+      className="dropdown-item newDropdownItem"
+      key={index}
+      href={fullPath}
+      target="_blank" // Opens in a new tab
+      rel="noopener noreferrer" // For security reasons
+      style={{ marginLeft: "0px" }}
+    >
+      {item.namePage}
+    </a>
+  ) : (
+    <Link
+      className="dropdown-item newDropdownItem"
+      key={index}
+      to={fullPath}
+      style={{ marginLeft: "0px" }}
+    >
+      {item.namePage}
+    </Link>
+  );
+})}
+
             </div>
           </span>
 
-          {pages.slice(0, 5).map((item, index) => (
-        <Link key={index} to={`/${item.path.trim()}`}>
-          {item.namePage}
-        </Link>
-      ))}
+          {pages.slice(0, 5).map((item, index) => {
+  const isExternalLink = item.path.startsWith("http") || item.path.startsWith("https");
+  const fullPath = isExternalLink ? item.path.trim() : `/${item.path.trim()}`;
+
+  return isExternalLink ? (
+    <a
+      key={index}
+      href={fullPath}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {item.namePage}
+    </a>
+  ) : (
+    <Link key={index} to={fullPath}>
+      {item.namePage}
+    </Link>
+  );
+})}
+
         </div>
 
         <div className="nav-cart">
@@ -1024,7 +1110,7 @@ function Navbar() {
                   {socialLinks.map((link, index) => (
                     <a
                       key={index}
-                      href={link.link}
+                      href={addProtocol(link.link)}
                       className="social-icon"
                       style={{
                         color: "white",
@@ -1046,7 +1132,10 @@ function Navbar() {
                 className="row imageInLastSideMenu"
                 style={{ marginTop: "30px", width: "100%" }}
               >
-                <img src={imageunderSideMenu} className="imageunderSideMenu" />
+                <img
+                  src={`http://localhost:1010/${imagBlow.imgsidemenubelow}`}
+                  className="imageunderSideMenu"
+                />
               </div>
             </div>
           </motion.div>

@@ -74,18 +74,22 @@ export default function Part3FiveSection() {
           speed={70}
           pauseOnHover={false}
          >
-      {marqueeItems.map((item, index) => (
-        <React.Fragment key={index}>
-          <p className="textMarqueeLast" style={{ color: 'white' }}>
-            {item['title-third-marquee']}
-              <img
-            src={`http://localhost:1010/${item.imageThirdMarqueePath}`}
+      {marqueeItems.map((item) => (
+        <React.Fragment key={item['id-third-marquee']}>
+          <p className="textMarqueeFirst" style={{ color: 'white' }}>
+          {item['titleThirdMarquee']}
 
-               
-                alt={item.title}
+          {item.imageThirdMarqueePath &&
+          (
+
+
+              <img
+               src={`http://localhost:1010/${item.imageThirdMarqueePath}`}
+            
                 height="70px"
                 width="70px"
               />
+          )}
           </p>
       
          

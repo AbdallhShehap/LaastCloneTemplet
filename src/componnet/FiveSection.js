@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FiveSectionSlider from "./FiveSectionSlider";
 import Part3FiveSection from "./Part3FiveSection";
 import "../asisste/FiveSection.css";
+import { Link } from "react-router-dom";
 
 export default function FiveSection() {
+ 
+
+  const [products, setProducts] = useState([])
+
+
+useEffect(() => {
+  // Fetch data from the API using Axios
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:1010/newsslider/datafixednews/1');
+      // Assuming the response data is an array of objects with 'title' and 'image' properties
+      console.log(response.data)
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  fetchData();
+}, []);
+
+ 
   return (
     <>
       {/* col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-2 */}
@@ -29,7 +53,7 @@ export default function FiveSection() {
             <p
               style={{ color: "#888888", fontSize: "20px", fontWeight: "600", fontFamily:"sans-serif", cursor:'default' }}
             >
-              Check Our Company Inside Story
+              {products.title1}
             </p>
           </Col>
 
@@ -45,7 +69,7 @@ export default function FiveSection() {
               alignItems: "start",
             }}
           >
-            <h2 style={{ color: "white", fontFamily:"sans-serif",cursor:'default' }}>Check Our Company Inside Story</h2>
+            <h2 style={{ color: "white", fontFamily:"sans-serif",cursor:'default' }}>              {products.title2}</h2>
           </Col>
 
           <Col xs={5} md={5} xl={2} xxl={2}>
@@ -54,10 +78,13 @@ export default function FiveSection() {
                <button class="circlebtn">GET_IN_TOUCH</button>
                </div> */}
 
+               <Link to={products.buttonLink}>
               <div className="fivecircle-btn"></div>
               <span className="fivecircle-btnspan" style={{ color: "white" }}>
-                MORE NEWS
+              {products.buttonName}
+
               </span>
+              </Link>
             </div>
           </Col>
 

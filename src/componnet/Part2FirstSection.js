@@ -9,15 +9,25 @@ import "../asisste/FirstSection.css";
 export default function TwoColumnLayout() {
   const [activeSection, setActiveSection] = useState(null);
   const [ourBenefitsFixed, setOurBenefitsFixed] = useState({});
+  const [ourBenefitsImgFixed, setOurBenefitsImgFixed] = useState({});
 
 
   const [ourBenfits, setOurBenfits] = useState([]);
 
   useEffect(() => {
 
-    const fetchFixdContent = async () => {
+    const fetchOurBenefitsImgFixed = async () => {
       try {
         const response = await axios.get('http://localhost:1010/ourbenfits/imgourbenefits');
+        setOurBenefitsImgFixed(response.data[0]);
+      } catch (error) {
+        console.error('Error fetching main content:', error);
+      }
+    };
+    
+    const fetchFixdContent = async () => {
+      try {
+        const response = await axios.get('http://localhost:1010/ourbenfits/textourbenefits');
         setOurBenefitsFixed(response.data[0]);
       } catch (error) {
         console.error('Error fetching main content:', error);
@@ -40,6 +50,7 @@ export default function TwoColumnLayout() {
 
     fetchFixdContent();
     fetchData();
+    fetchOurBenefitsImgFixed();
   }, []);
 
 
@@ -150,13 +161,17 @@ export default function TwoColumnLayout() {
         
 
         <div className="col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-6 right-side">
-          <img
-            className="right-side-img"
-            src={`http://localhost:1010/${ourBenefitsFixed.imgSection}`}
+          {ourBenefitsImgFixed.imgSection && (
 
-            alt="Your Image"
-
-          />
+            <img
+              className="right-side-img"
+              src={`http://localhost:1010/${ourBenefitsImgFixed.imgSection}`}
+  
+              alt="Your Image"
+  
+            />
+          )
+          }
         </div>
       </div>
     </div>

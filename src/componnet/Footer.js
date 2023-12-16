@@ -100,7 +100,7 @@ export default function Footer() {
 
     const fetchSecoundSectionContentData = async () => {
       try {
-        const response = await axios.get('http://localhost:1010/footer/detailssecoundsectioncontent');
+        const response = await axios.get('http://localhost:1010/footer/detailssecoundsecitoncontent');
         // Assuming the response data is an array of objects with 'title' and 'image' properties
         console.log({logo: response.data[0]})
         setSecoundsectioncontentdata(response.data);
@@ -129,6 +129,15 @@ export default function Footer() {
   }, []);
 
 
+// Function to add protocol if missing
+const addProtocol = (url) => {
+  // Check if the link starts with a protocol
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    // If not, prepend 'http://' (you can adjust this logic based on your requirements)
+    return `http://${url}`;
+  }
+  return url;
+};
 
   return (
     <div className="container-fluid" style={{ backgroundColor: "black" }}>
@@ -177,9 +186,9 @@ export default function Footer() {
                   <h6 className="text-uppercase fw-bold mb-4">{title.footerSecoundTitle}</h6>
                   {secoundSectionContentData.map((item, index) => (
             <p key={index}>
-              <Link to={item.path} style={{textDecoration:"none", color:"white"}} >
+              {/* <Link to={item.path} style={{textDecoration:"none", color:"white"}} > */}
                 {item.name}
-              </Link>
+              {/* </Link> */}
             </p>
           ))}
                 </MDBCol>
@@ -226,18 +235,17 @@ export default function Footer() {
   <MDBCol md="3" lg="3" xl="3" >
     <MDBIcon icon="print" className="me-3 " />
     <div>
-      {socialLinks.map((link, index) => (
-        <a
-          key={index}
-          href={link.link}
-          className="social-icon"
-          style={{ color: 'white', marginLeft: index > 0 ? '1rem' : '0' }}
-        >
-          <img  src={`http://localhost:1010/${link.icon}`} style={{height:"35px"}}/>
-          
-        </a>
-      ))}
-    </div>
+  {socialLinks.map((link, index) => (
+    <a
+      key={index}
+      href={addProtocol(link.link)}
+      className="social-icon"
+      style={{ color: 'white', marginLeft: index > 0 ? '1rem' : '0' }}
+    >
+      <img  src={`http://localhost:1010/${link.icon}`} style={{height:"35px"}}/>
+    </a>
+  ))}
+</div>
   </MDBCol>
 </MDBRow>
 
